@@ -1,0 +1,12 @@
+%cursor-pointer {
+  &:hover,
+  &:active {
+    cursor: pointer;
+  }
+}
+
+.button,
+.label,
+input[type="submit"] {
+  @extend %cursor-pointer;
+}
