@@ -1,43 +1,43 @@
 <template>
   <div id="data-form">
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" class="form">
 
-      <label for="name" class="label">Name</label>
+      <label for="name" class="label">Name:</label>
       <input
         id="name"
         ref="first"
         type="text"
         v-model="data.name"
         class="input"
-        :class="{ 'has-error': submitting && invalidName }"
+        :class="{ 'input--error': submitting && isEmptyName }"
         @focus="clearStatus"
         @keypress="clearStatus"
-      />  <!-- isn't @focus enough? or only @keypress? -->
+        @click="clearStatus"
+      />
 
-      <label for="email" class="label">Email</label>
+      <label for="email" class="label">Email:</label>
       <input
         id="email"
         type="email"
         v-model="data.email"
         class="input"
-        :class="{ 'has-error': submitting && invalidEmail }"
+        :class="{ 'input--error': submitting && isEmptyEmail }"
         @focus="clearStatus"
-        @keypress="clearStatus"
       />
 
       <input type="submit" class="submit-button" value="Add data" />
 
       <p
-        v-if="error && submitting"
+        v-if="submitting && error"
         class="error-message"
       >
-        ❗Please fill out all required fields
+        &#9940; Please fill out all required fields
       </p>
       <p
         v-if="success"
         class="success-message"
       >
-        ✅ Data successfully added
+        &#9989; Data successfully added
       </p>
 
     </form>
@@ -58,38 +58,39 @@
         }
       }
     },
-    computed: {  // what will be returned, where? how it works
-      invalidName() {
+    computed: {
+      isEmptyName() {
         return this.data.name === ''
       },
 
-      invalidEmail() {
+      isEmptyEmail() {
         return this.data.email === ''
       },
     },
     methods: {
       handleSubmit() {
-        this.clearStatus()
         this.submitting = true
+        this.success = false
+        this.error = false
 
-        if (this.invalidName || this.invalidEmail) {
-          this.error = true // why submitting isn't false too here?
+        if (this.isEmptyName || this.isEmptyEmail) {
+          this.error = true
           return
         }
 
         this.$emit('add:data', this.data)
-        this.$refs.first.focus()
         this.data = {
           name: '',
           email: '',
         }
+        this.$refs.first.focus()
 
-        this.submitting = false
         this.success = true
         this.error = false
       },
 
       clearStatus() {
+        this.submitting = false
         this.success = false
         this.error = false
       }
@@ -99,24 +100,48 @@
 
 <style scoped lang="scss">
   @import './../templates.scss';
+  .form {
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    //align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
 
   .label,
   .input,
   .submit-button {
     display: block;
+    //text-align: center;
+  //  margin: auto;
   }
 
   .label {
-    margin-top: 15px;
+    //margin-top: 15px;
   }
 
   .input {
+    //align-self: center;
+    width: 90%;
     margin-bottom: 10px;
     padding: 7px 10px;
+
+    &--error {
+      border-color: Red;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    .input {width: 70%;}
+  }
+  @media screen and (min-width: 700px) {
+    .input {width: 50%;}
   }
 
   .submit-button {
-    margin: auto;
     padding: 5px 25px;
     border: 3px outset DarkOrchid;
     border-radius: 10px;
@@ -133,16 +158,16 @@
     }
   }
 
+  [class*='message'] {
+    text-align: center;
+    font-weight: 600;
+  }
+
   .error-message {
-    color: #d33c40;
+    color: Red;
   }
 
   .success-message {
-    color: #32a95d;
-  }
-
-  [class*='-message'] {
-    text-align: center;
-    font-weight: 600;
+    color: SeaGreen;
   }
 </style>

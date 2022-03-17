@@ -1,19 +1,4 @@
 # project-3
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Foundation
+The project is based on introductory guide ['Vue Tutorial: An Overview and Walkthrough'](https://www.taniarascia.com/getting-started-with-vue/) by Tania Rascia.

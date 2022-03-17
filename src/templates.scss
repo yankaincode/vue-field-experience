@@ -1,3 +1,8 @@
+%container--centered {
+  display: block;
+  margin: auto;
+}
+
 %cursor-pointer {
   &:hover,
   &:active {
@@ -5,8 +10,8 @@
   }
 }
 
-.button,
-.label,
+button,
+label,
 input[type="submit"] {
   @extend %cursor-pointer;
 }

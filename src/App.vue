@@ -1,12 +1,13 @@
 <template>
-  <div class="main-container container--small container--centered">
+  <div class="main-container">
     <h1 class="page-title">Data</h1>
 
-    <h2 class="">Data form</h2>
+    <h2 class="section-title">Data form</h2>
     <data-form @add:data="addData" />
 
-    <h2 class="">Data table</h2>
+    <h2 class="section-title">Data table</h2>
     <data-table :dataCollection="dataCollection" />
+
   </div>
 </template>
 
@@ -46,7 +47,7 @@
         const lastId = this.dataCollection.length > 0
           ? this.dataCollection.length : 0;
         const id = lastId + 1;
-        const newData = { ...data, id };
+        const newData = { id, ...data };
 
         this.dataCollection = [...this.dataCollection, newData]
       }
@@ -56,20 +57,27 @@
 
 <style scoped lang="scss">
   @import "./library.blocks/css-normalize/css-normalize.scss";
+  @import './templates.scss';
 
   .main-container {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding: 0 15px 10px;
-    color: #2c3e50;
+    max-width: 800px;
+    padding: 5px;
+    color: MidnightBlue;
+    @extend %container--centered;
   }
 
   .page-title {
+    margin: 0;
+    border-radius: 15px 15px 0 0;
+    padding: 30px 0 10px;
     text-align: center;
-    color: DarkTurquoise;
+    color: white;
+    background-color: Teal;
   }
-
-  .container--small {max-width: 680px;}
-  .container--centered {margin: auto;}
+  .section-title {
+    padding-left: 10px;
+  }
 </style>
