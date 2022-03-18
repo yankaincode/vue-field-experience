@@ -6,7 +6,11 @@
     <data-form @add:data="addData" />
 
     <h2 class="section-title">Data table</h2>
-    <data-table :dataCollection="dataCollection" />
+    <data-table
+      :dataCollection="dataCollection"
+      @delete:data="deleteData"
+      @edit:data="editData"
+    />
 
   </div>
 </template>
@@ -50,6 +54,18 @@
         const newData = { id, ...data };
 
         this.dataCollection = [...this.dataCollection, newData]
+      },
+      
+      deleteData(id) {
+        this.dataCollection = this.dataCollection.filter(
+          data => data.id !== id //приходится по всем проходиться
+        )
+      },
+
+      editData(id, updatedData) {
+        this.dataCollection = this.dataCollection.map(data =>
+          data.id === id ? updatedData : data
+        )
       }
     }
   }

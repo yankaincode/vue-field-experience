@@ -100,6 +100,7 @@
 
 <style scoped lang="scss">
   @import './../templates.scss';
+
   .form {
     display: flex;
     flex-direction: column;
@@ -146,7 +147,6 @@
     border: 3px outset DarkOrchid;
     border-radius: 10px;
     font-size: 1em;
-    font-weight: bold;
     color: white;
     background: DarkOrchid;
 
@@ -160,7 +160,7 @@
 
   [class*='message'] {
     text-align: center;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   .error-message {

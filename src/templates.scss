@@ -13,5 +13,6 @@
 button,
 label,
 input[type="submit"] {
+  font-weight: bold;
   @extend %cursor-pointer;
 }
