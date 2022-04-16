@@ -1,99 +1,172 @@
 <template>
-  <div class="main-container">
-    <h1 class="page-title">Data</h1>
+  <div class="body-container">
+    <div class="window-container">
 
-    <h2 class="section-title">Data form</h2>
-    <data-form @add:data="addData" />
+      <header class="header-container">
+        <nav class="header-container__nav-bar nav-bar">
+          <button
+            v-for="tab in tabs"
+            :key="tab"
+            @click="currentTab = tab"
+            :class="['nav-bar__tab-button', 'tab-button', {'tab-button--active' : currentTab === tab}]"
+          >
+            {{tab}}
+          </button>
+        </nav>
+      </header>
 
-    <h2 class="section-title">Data table</h2>
-    <data-table
-      :dataCollection="dataCollection"
-      @delete:data="deleteData"
-      @edit:data="editData"
-    />
+      <main class="main-container">
+        <h1 class="page__title">{{currentTab}}</h1>
+        <Transition name="fade" mode="out-in" type="transition" duration="300" appear="appear">
+          <KeepAlive>
+            <component
+              :is="currentTab"
+              class="main-container__tab"
+            ></component>
+          </KeepAlive>
+        </Transition>
+      </main>
+
+      <footer class="footer-container">
+        <p>Coded by <a href="https://yankaincode.com/">Yanka_InCode</a></p>
+        <p>Background image compilated by <a href="https://viola-igua.tumblr.com/">ViolaIgua</a></p>
+      </footer>
+    </div>
 
   </div>
 </template>
 
 <script>
-  import DataTable from '@/components/DataTable.vue'
-  import DataForm from '@/components/DataForm.vue'
+  import About from '@/components/About.vue'
+  import Data from '@/components/Data.vue'
 
   export default {
     name: 'app',
     components: {
-      DataTable,
-      DataForm
+      About,
+      Data
     },
     data() {
       return {
-        dataCollection: [
-          {
-            id: 1,
-            name: 'Richard Hendricks',
-            email: 'richard@piedpiper.com',
-          },
-          {
-            id: 2,
-            name: 'Bertram Gilfoyle',
-            email: 'gilfoyle@piedpiper.com',
-          },
-          {
-            id: 3,
-            name: 'Dinesh Chugtai',
-            email: 'dinesh@piedpiper.com',
-          },
-        ],
+        currentTab: 'About',
+        tabs: ['About', 'Data']
+      }
+    },
+    mounted() {
+      const headerTabButtons = document.querySelector('.header-container__nav-bar').children
+
+      for (let button of headerTabButtons) {
+        if (button.innerText === this.currentTab) {
+          button.setAttribute('aria-label', 'The tab is opened.')
+        } else {
+          button.setAttribute('aria-label', 'Open the tab on this page.')
+        }
       }
     },
     methods: {
-      addData(data) {
-        const lastId = this.dataCollection.length > 0
-          ? this.dataCollection.length : 0;
-        const id = lastId + 1;
-        const newData = { id, ...data };
 
-        this.dataCollection = [...this.dataCollection, newData]
-      },
-      
-      deleteData(id) {
-        this.dataCollection = this.dataCollection.filter(
-          data => data.id !== id //приходится по всем проходиться
-        )
-      },
-
-      editData(id, updatedData) {
-        this.dataCollection = this.dataCollection.map(data =>
-          data.id === id ? updatedData : data
-        )
-      }
     }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import "./library.blocks/css-normalize/css-normalize.scss";
   @import './templates.scss';
 
-  .main-container {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    max-width: 800px;
-    padding: 5px;
-    color: MidnightBlue;
-    @extend %container--centered;
+  .body-container {
+    background-image: url('./assets/ViolaIgua-background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    @extend %break-long-words;
   }
 
-  .page-title {
-    margin: 0;
-    border-radius: 15px 15px 0 0;
-    padding: 30px 0 10px;
-    text-align: center;
-    color: white;
-    background-color: Teal;
+  .window-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 15px 0;
+
+    font-family: Helvetica, Arial, sans-serif;
+    color: MidnightBlue;
   }
-  .section-title {
-    padding-left: 10px;
+
+  .header-container {
+    &__nav-bar {}
+  }
+
+  .nav-bar {
+    &__tab-button {
+      width: 100px;
+      margin-left: 10px;
+      padding: 10px 10px 5px;
+      box-shadow: 0 0 6px 2px SlateBlue;
+
+      &:first-child {margin-left: 20px;}
+    }
+  }
+
+  .tab-button {
+    border-radius: 5px 5px 0 0;
+    background-color: MediumAquamarine;
+
+    &:hover {
+      background: linear-gradient(90deg, MediumAquamarine, White);
+    }
+
+    &--active {
+      background: linear-gradient(180deg, MediumAquamarine, Wheat, White);
+
+      &:hover {
+        background: linear-gradient(90deg, MediumAquamarine, Wheat, White);
+      }
+    }
+  }
+
+  .main-container {
+    flex: 1 1 auto;
+    padding: 5px;
+    border-radius: 15px;
+    line-height: 1.8;
+    background-color: White;
+    box-shadow:
+      -1px 1px 6px SlateBlue,
+      1px -1px 6px SlateBlue;
+
+    &__tab {
+
+    }
+  }
+
+  .footer-container {
+    max-width: 500px;
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+
+    & p {
+      padding: 0 10px;
+      line-height: 1.4;
+      font-size: .9em;
+      font-weight: bold;
+      text-shadow:
+        0 2px 5px white,
+        0 -2px 5px white,
+        -2px 0 5px white,
+        2px 0 5px white;
+    }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.25s ease-out;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
