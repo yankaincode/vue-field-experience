@@ -1,6 +1,10 @@
-%container--centered {
-  display: block;
-  margin: auto;
+%break-long-words {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 %cursor-pointer {
@@ -14,5 +18,55 @@ button,
 label,
 input[type="submit"] {
   font-weight: bold;
+}
+
+input[type="submit"] {
   @extend %cursor-pointer;
+}
+
+.input {
+  border-color: SteelBlue;
+  border-radius: 8px;
+  transition: .4s linear;
+
+  &:focus {
+    border-color: RoyalBlue;
+    background-color: White;
+  }
+
+  &--empty {
+    background-color: Lavender;
+  }
+  &--filled {background-color: AntiqueWhite;}
+  &--rejected {
+    border-color: Red !important;
+    background-color: MistyRose !important;
+  }
+}
+
+.content-container {
+  padding: 10px 15px 15px;
+}
+
+.page__title {
+  margin: 0;
+  padding: 20px 0 5px;
+  border-radius: 13px 13px 0 0;
+  text-align: center;
+  color: white;
+  background-color: Teal;
+}
+
+.section {
+  &__title {
+    margin-top: 5px;
+    padding: 7px 15px 0;
+    border-left: 8px solid MediumAquamarine;
+    background: linear-gradient(90deg, Wheat, PaleTurquoise);
+  }
+
+  &--text p {
+    margin: 0 15px;
+    text-align: justify;
+  }
 }

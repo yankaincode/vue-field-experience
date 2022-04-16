@@ -1,57 +1,54 @@
 <template>
-  <div id="data-form">
+  <div class="data-form">
     <form @submit.prevent="handleSubmit" class="form">
 
-      <label for="name" class="label">Name:</label>
+      <label for="name" class="form__label label">Name:</label>
       <input
-        id="name"
-        ref="first"
+        ref="firstFormInput"
         type="text"
-        v-model="data.name"
-        class="input"
-        :class="{ 'input--error': submitting && isEmptyName }"
-        @focus="clearStatus"
-        @keypress="clearStatus"
+        maxlength="65"
+        v-model.trim="data.name"
+        :class="['form__input', 'input',
+          {'input--rejected': validationStatus.value === 'empty-input' && isEmptyName
+          || validationStatus.value === 'invalid-name'},
+          isEmptyName ? 'input--empty' : 'input--filled'
+        ]"
         @click="clearStatus"
-      />
-
-      <label for="email" class="label">Email:</label>
-      <input
-        id="email"
-        type="email"
-        v-model="data.email"
-        class="input"
-        :class="{ 'input--error': submitting && isEmptyEmail }"
         @focus="clearStatus"
+        @keydown="handleInput('name')"
+        @keyup="clearStatus"
       />
 
-      <input type="submit" class="submit-button" value="Add data" />
+      <label for="email" class="form__label label">Email:</label>
+      <input
+        type="email"
+        maxlength="138"
+        v-model.trim="data.email"
+        :class="['form__input', 'input',
+          {'input--rejected': validationStatus.value === 'empty-input' && isEmptyEmail
+          || validationStatus.value === 'invalid-email'},
+          isEmptyEmail ? 'input--empty' : 'input--filled'
+        ]"
+        @focus="clearStatus"
+        @keydown="handleInput('email')"
+        @keyup="clearStatus"
+      />
 
-      <p
-        v-if="submitting && error"
-        class="error-message"
-      >
-        &#9940; Please fill out all required fields
-      </p>
-      <p
-        v-if="success"
-        class="success-message"
-      >
-        &#9989; Data successfully added
-      </p>
+      <input type="submit" class="form__submit-button submit-button" value="Add data" />
 
     </form>
   </div>
 </template>
 
 <script>
+  import { validationStatus } from './../store/validationStatus.js'
+  import * as checkForm from './../modules/check-form.js'
+
   export default {
     name: 'data-form',
     data() {
       return {
-        submitting: false,
-        success: false,
-        error: false,
+        validationStatus,
         data: {
           name: '',
           email: ''
@@ -62,19 +59,22 @@
       isEmptyName() {
         return this.data.name === ''
       },
-
       isEmptyEmail() {
         return this.data.email === ''
-      },
+      }
     },
     methods: {
       handleSubmit() {
-        this.submitting = true
-        this.success = false
-        this.error = false
+        validationStatus.update('pending')
 
         if (this.isEmptyName || this.isEmptyEmail) {
-          this.error = true
+          validationStatus.update('empty-input')
+          return
+        } else if (!checkForm.isNameValid(this.data.name)) {
+          validationStatus.update('invalid-name')
+          return
+        } else if (!checkForm.isEmailValid(this.data.email)) {
+          validationStatus.update('invalid-email')
           return
         }
 
@@ -83,91 +83,65 @@
           name: '',
           email: '',
         }
-        this.$refs.first.focus()
+        this.$refs.firstFormInput.focus()
 
-        this.success = true
-        this.error = false
+        validationStatus.update('fulfilled')
       },
 
       clearStatus() {
-        this.submitting = false
-        this.success = false
-        this.error = false
+        validationStatus.update('')
+      },
+
+      handleInput(field) {
+        checkForm.handleInput(field)
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  @import './../templates.scss';
-
   .form {
     display: flex;
     flex-direction: column;
-    //justify-content: center;
-    //align-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-  }
+    padding: 0 20px 10px;
 
-  .label,
-  .input,
-  .submit-button {
-    display: block;
-    //text-align: center;
-  //  margin: auto;
-  }
+    &__input {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 7px 10px;
+      border-width: 6px;
+      border-style: outset;
+    }
 
-  .label {
-    //margin-top: 15px;
-  }
+    &__label {
+      align-self: flex-start;
+    }
 
-  .input {
-    //align-self: center;
-    width: 90%;
-    margin-bottom: 10px;
-    padding: 7px 10px;
+    &__submit-button {
+      padding: 10px 25px 5px;
+      border: 3px outset DarkOrchid;
+      border-radius: 10px;
 
-    &--error {
-      border-color: Red;
+      &:hover {border-style: inset;}
     }
   }
 
   @media screen and (min-width: 500px) {
-    .input {width: 70%;}
+    .input {width: 75%;}
+    .label {align-self: center;}
   }
   @media screen and (min-width: 700px) {
-    .input {width: 50%;}
+    .input {width: 60%;}
   }
 
   .submit-button {
-    padding: 5px 25px;
-    border: 3px outset DarkOrchid;
-    border-radius: 10px;
     font-size: 1em;
     color: white;
     background: DarkOrchid;
 
     &:hover {background: DarkMagenta;}
-
-    &:active {
-      border-style: inset;
-      background: Purple;
-    }
-  }
-
-  [class*='message'] {
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .error-message {
-    color: Red;
-  }
-
-  .success-message {
-    color: SeaGreen;
+    &:active {background: Purple;}
   }
 </style>
