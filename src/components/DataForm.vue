@@ -120,11 +120,12 @@
     }
 
     &__submit-button {
+      margin-top: 10px;
       padding: 10px 25px 5px;
-      border: 3px outset DarkOrchid;
+      border: 3px outset MediumSlateBlue;
       border-radius: 10px;
 
-      &:hover {border-style: inset;}
+      &:active {border-style: inset;}
     }
   }
 
@@ -138,10 +139,22 @@
 
   .submit-button {
     font-size: 1em;
-    color: white;
-    background: DarkOrchid;
+    background: linear-gradient(
+      130deg,
+      Plum, MintCream, SkyBlue
+    );
 
-    &:hover {background: DarkMagenta;}
-    &:active {background: Purple;}
+    &:hover {
+      background: linear-gradient(
+        130deg,
+       white, Aquamarine, Pink
+      );
+    }
+    &:active {
+      background: linear-gradient(
+        130deg,
+       PeachPuff, Aquamarine, Violet
+      );
+    }
   }
 </style>

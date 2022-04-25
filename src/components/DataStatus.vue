@@ -49,12 +49,12 @@
     }
 
     &--with-data {
-      color: Teal;
+      color: MediumBlue;
       @include symbol("\2728");
     }
 
     &--no-data {
-      color: MediumBlue;
+      color: Indigo;
       @include symbol("\01F4AB");
     }
   }

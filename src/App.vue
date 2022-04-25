@@ -28,8 +28,8 @@
       </main>
 
       <footer class="footer-container">
-        <p>Coded by <a href="https://yankaincode.com/">Yanka_InCode</a></p>
-        <p>Background image compilated by <a href="https://viola-igua.tumblr.com/">ViolaIgua</a></p>
+        <p>Coded by <a href="https://yankaincode.com/" target="_blank" rel="noopener"  class="link">Yanka_InCode</a></p>
+        <p>Background image compilated by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link">ViolaIgua</a></p>
       </footer>
     </div>
 
@@ -73,6 +73,33 @@
   @import "./library.blocks/css-normalize/css-normalize.scss";
   @import './templates.scss';
 
+  $bodyTextColor: MidnightBlue;
+  %focusSelectStyle {
+    color: $bodyTextColor;
+    text-shadow: none;
+  }
+
+  ::-moz-selection,
+  ::selection {
+    background-color: PowderBlue;
+    @extend %focusSelectStyle;
+  }
+
+  a,
+  select,
+  textarea,
+  button,
+  input[type="submit"],
+  summary {
+    &:focus {
+      background: linear-gradient(
+        130deg,
+        LightSkyBlue, PaleTurquoise, LightCyan, LightBlue, SkyBlue, DodgerBlue
+      );
+      @extend %focusSelectStyle;
+    }
+  }
+
   .body-container {
     background-image: url('./assets/ViolaIgua-background.png');
     background-repeat: no-repeat;
@@ -89,9 +116,8 @@
     max-width: 800px;
     margin: auto;
     padding: 15px 0;
-
     font-family: Helvetica, Arial, sans-serif;
-    color: MidnightBlue;
+    color: $bodyTextColor;
   }
 
   .header-container {
@@ -131,7 +157,7 @@
     padding: 5px;
     border-radius: 15px;
     line-height: 1.8;
-    background-color: White;
+    background-color: Snow;
     box-shadow:
       -1px 1px 6px SlateBlue,
       1px -1px 6px SlateBlue;

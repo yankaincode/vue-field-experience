@@ -31,16 +31,17 @@ input[type="submit"] {
 
   &:focus {
     border-color: RoyalBlue;
-    background-color: White;
+    background-color: White !important;
   }
+  &:hover {background-color: Seashell;}
 
   &--empty {
     background-color: Lavender;
   }
   &--filled {background-color: AntiqueWhite;}
   &--rejected {
-    border-color: Red !important;
-    background-color: MistyRose !important;
+    border-color: Crimson ;
+    background-color: Pink;
   }
 }
 
@@ -66,7 +67,17 @@ input[type="submit"] {
   }
 
   &--text p {
-    margin: 0 15px;
+    margin: 10px 15px 0;
     text-align: justify;
   }
+}
+
+.link {
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  color: MediumBlue;
+
+  &:hover {color: RoyalBlue;}
+  &:active {color: Blue;}
 }

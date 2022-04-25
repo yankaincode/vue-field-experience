@@ -26,8 +26,7 @@
               type="text"
               maxlength="65"
               v-model.trim="data.name"
-              class="tbody__input input"
-              :class="[
+              :class="['tbody__input', 'input',
                 {'input--rejected': this.editStatus === 'empty-input' && data.name.length === 0
                 || this.editStatus === 'invalid-name'},
                 data.name.length === 0 ? 'input--empty' : 'input--filled'
@@ -44,8 +43,7 @@
               type="email"
               maxlength="138"
               v-model.trim="data.email"
-              class="tbody__input input"
-              :class="[
+              :class="['tbody__input', 'input',
                 {'input--rejected': this.editStatus === 'empty-input' && data.email.length === 0
                 || this.editStatus === 'invalid-email'},
                 data.email.length === 0 ? 'input--empty' : 'input--filled'
@@ -58,9 +56,8 @@
           <td v-else class="tbody__td td">{{ data.email }}</td>
 
           <td
-            class="tbody__td td"
-            :class="{'td--editing': editingId === data.id,
-            'td--not-editing': editingId !== data.id && this.editLaunched}"
+            :class="['tbody__td', 'td', {'td--editing': editingId === data.id,
+            'td--not-editing': editingId !== data.id && this.editLaunched}]"
           >
             <Transition name="action-buttons" mode="out-in">
               <div v-if="!editingId" class="td__actions-container actions-container">
@@ -179,7 +176,7 @@
     border-collapse: collapse;
     @extend %table-border-style;
 
-    &__thead {background-color: PaleTurquoise;}
+    &__thead {background-color: PeachPuff;}
     &__caption {
       padding: 10px 10px 5px;
       background-color: Wheat;
@@ -228,7 +225,7 @@
       &:nth-child(odd) {background-color: Azure;}
       &:nth-child(even) {background-color: LightCyan;}
 
-      &:hover {background-color: rgb(106, 90, 205, 0.3);}
+      &:hover {background-color: rgb(106, 90, 205, 0.2);}
     }
 
     &__input {

@@ -4,16 +4,10 @@
     <div class="section section--text">
       <h2 class="section__title">Project description</h2>
 
-      <p>This website is made on Vue.js framework. Table receives JSON data using Axios.</p>
-      <p>The project is based on:</p>
-      <ul class="section__ul ul ul--guides">
-        <li>
-          an introductory guide <a href="https://www.taniarascia.com/getting-started-with-vue/" target="_blank" rel="noopener">'Vue Tutorial: An Overview and Walkthrough'</a> by Tania Rascia;
-        </li>
-        <li>
-          a <a href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener">documentation</a> for Vue 3;
-        </li>
-      </ul>
+      <p>This website is made on Vue.js framework. Data table receives JSON data using Axios.</p>
+      <p>
+        The project is based on documentations <a href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener" class="link">for Vue 3</a> and <a href="https://axios-http.com/docs/intro" target="_blank" rel="noopener" class="link">for Axios</a> and inspired by introduction guide <a href="https://www.taniarascia.com/getting-started-with-vue/" target="_blank" rel="noopener" class="link">'Vue Tutorial: An Overview and Walkthrough'</a> by Tania Rascia.
+      </p>
       <p>All used stack and tools:</p>
       <ul class="section__ul ul ul--string ul--basis">
         <li>HTML5</li>
@@ -54,10 +48,7 @@
 
   .ul {
     margin-right: 20px;
-    &--guides {
-      margin-left: 35px;
-      list-style-type: square;
-    }
+    
     &--string {
       text-align: center;
 
@@ -71,9 +62,9 @@
       }
     }
 
-    &--basis {@include symbol("\01F9E9");}
+    &--basis {@include symbol("\01F3BC");}
     &--addon {@include symbol("\01F3B7");}
     &--pallet {@include symbol("\01F941");}
-    &--ui {@include symbol("\01F3B8");}
+    &--ui {@include symbol("\01F3A7");}
   }
 </style>
