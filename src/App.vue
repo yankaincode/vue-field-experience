@@ -39,7 +39,7 @@
           </a>
         </svg>
         <p class="footer-container__p">Coded by <a href="https://yankaincode.com/" target="_blank" rel="noopener"  class="link link--Yanka">Yanka_InCode</a></p>
-        <p class="footer-container__p">Background image compilated by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
+        <p class="footer-container__p">Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
       </footer>
     </div>
 
@@ -170,7 +170,7 @@
 
   .footer-container {
     width: 80%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 10px;
     text-align: center;
@@ -184,7 +184,7 @@
       font-size: .8em;
       font-weight: bold;
     }
-    
+
     &__svg {animation: svg-box-shadow 12s linear infinite;}
   }
 

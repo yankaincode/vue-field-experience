@@ -1,7 +1,7 @@
 <template>
   <div class="about-tab">
 
-    <div class="section">
+    <section class="about-tab__section section">
       <h2 class="section__title title">Project description</h2>
       <div class="section__content content">
         <p>It's a front-end project made on Vue.js framework.
@@ -16,8 +16,8 @@
           <li>new data from Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround for editing new data a PATCH request method only was used for the case,</li>
           <li>added &lt;component&gt; switching for tabs,</li>
           <li>added animations by built-in components &lt;Transition&gt; and &lt;TransitionGroup&gt;,</li>
-          <li>worked with SCSS, BEM, Git for practice,</li>
-          <li>added more style (tried my best in UI design).</li>
+          <li>added more style to UI design,</li>
+          <li>worked with SCSS, BEM, Git for practice.</li>
         </ul>
         <p>All used stack and tools:</p>
         <ul class="content__ul-list ul-list ul-list--string ul-list--basis">
@@ -42,7 +42,7 @@
           <li>adoptable to different screens</li>
         </ul>
       </div>
-    </div>
+    </section>
 
   </div>
 </template>

@@ -11,14 +11,14 @@
     <div v-else>
       <p class="data-tab--downloader__p p">
         Sorry, we've met a download error.
-        <br />Check your connection to the Internet. If it's alright, please inform me of this incident by e-mail on <a class="link" href="mailto:support@yankaincode.com?subject=Data tab: A download error &body=I tried to open Data tab, but it didn't download, and it wasn't the Internet connection issue.">support@yankaincode.com</a>.
+        <br />Check your connection to the Internet. If it's alright, please inform me of this incident by e-mail on <a class="link" href="mailto:support@yankaincode.com?subject=Data tab: A download error &body=I've tried to open Data tab, but it didn't download, and it wasn't the Internet connection issue.">support@yankaincode.com</a>.
       </p>
       <button @click="getData" class="data-tab--downloader__button button">Update the page</button>
     </div>
   </div>
 
   <div v-else class="data-tab">
-    <div class="data-tab__section section">
+    <section class="data-tab__section section">
       <h2 class="section__title title">Data form</h2>
       <Transition name="form-show-up" type="transition" appear>
         <KeepAlive>
@@ -28,9 +28,9 @@
           />
         </KeepAlive>
       </Transition>
-    </div>
+    </section>
 
-    <div class="data-tab__section section">
+    <section class="data-tab__section section">
       <DataStatus
         :errors-arr="controlValidationForm.errorsArr"
         :validation-status="controlValidationForm.get()"
@@ -38,9 +38,9 @@
         :edit-mode="controlModeEdit.get()"
         class="section__content content"
       />
-    </div>
+    </section>
 
-    <div class="data-tab__section section">
+    <section class="data-tab__section section">
       <h2 class="section__title title">Data table</h2>
       <DataTable
         :data-collection="dataCollection"
@@ -48,7 +48,7 @@
         @edit:data="editData"
         class="section__table table"
       />
-    </div>
+    </section>
   </div>
 
 </template>
