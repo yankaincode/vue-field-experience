@@ -1,0 +1,21 @@
+.svg {
+  width: 38px;
+  height: 35px;
+  padding: 3px;
+  border: 2px dotted Purple;
+  border-radius: 50%;
+  fill: MediumBlue;
+
+  &__svg-link {
+    &:hover {fill: RoyalBlue;}
+    &:focus {fill: Violet;}
+  }
+}
+
+.svg-link {
+  &__rect {
+    width:100%;
+    height: 100%;
+    fill: #ffffff;
+  }
+}

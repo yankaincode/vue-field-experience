@@ -1,0 +1,38 @@
+::-moz-selection,
+::selection {
+  background-color: PowderBlue;
+  color: MidnightBlue;
+  text-shadow: none;
+}
+
+a,
+select,
+textarea,
+button,
+input,
+summary {
+  &:focus {
+    box-shadow: 0 0 3px 3px Violet;
+  }
+}
+
+a,
+select,
+textarea,
+button,
+input[type="submit"],
+summary {
+  &:focus {
+    color: Blue;
+    text-decoration: underline;
+  }
+}
+
+button,
+input,
+input[type="submit"] {
+  &:disabled {
+    color: DarkSlateGrey;
+    opacity: 0.8;
+  }
+}

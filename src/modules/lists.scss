@@ -1,0 +1,24 @@
+.ul-list {
+  &--string {
+    & li {
+      display: block;
+      &:before {padding: 0 5px 0 20px;}
+    }
+  }
+
+  &--roll {padding-left: 20px;}
+}
+
+@media screen and (min-width: 500px) {
+  .ul-list {
+    &--string {
+      text-align: center;
+      
+      & li {display: inline-block;}
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .ul-list--roll {padding-left: 60px;}
+}

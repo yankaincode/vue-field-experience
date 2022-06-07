@@ -1,0 +1,27 @@
+.section {
+  &__title {
+    margin-top: 10px;
+    padding: 7px 15px 0;
+    border-left: 8px solid MediumAquamarine;
+    background: linear-gradient(90deg, Wheat, PaleTurquoise);
+  }
+
+  &__content {
+    margin: 20px 20px 0 15px;
+    text-align: justify;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .section__content {
+    margin-right: 40px;
+    margin-left: 25px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .section__content {
+    margin-right: 30px;
+    margin-left: 20px;
+  }
+}

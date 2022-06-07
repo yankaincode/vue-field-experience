@@ -1,287 +1,230 @@
 <template>
-  <div class="data-table">
+  <table class="data-table">
 
-    <table  class="table">
-
-      <caption
-        v-if="dataCollection.length < 1"
-        class="table__caption caption"
-      >
-        No data added
+    <Transition name="table-header" type="transition" mode="in-out">
+      <caption v-if="dataCollection.length < 1" class="data-table__caption caption caption--only-message">
+        No data here. Add some new!
       </caption>
-      <thead v-else class="table__thead thead">
-        <tr class="thead__tr tr">
-          <th class="thead__th th">Name</th>
-          <th class="thead__th th">Email</th>
-          <th class="thead__th th">Actions</th>
+      <thead v-else class="data-table__thead thead">
+        <tr class="thead__row row">
+          <th class="thead__cell cell">Name</th>
+          <th class="thead__cell cell">Email</th>
+          <th class="thead__cell cell">Actions</th>
         </tr>
       </thead>
+    </Transition>
 
-      <tbody class="table__tbody tbody">
-        <tr v-for="data in dataCollection" :key="data.id" class="tbody__tr">
+    <TransitionGroup
+      tag="tbody"
+      name="row-activity"
+      type="transition"
+      :duration="{enter: 1100, leave: 500}"
+      class="data-table__tbody tbody"
+    >
+      <tr
+        v-for="data in dataCollection"
+        :key="data.id"
+        :class="['tbody__row', 'row', {'row--editing': controlModeEdit.id === data.id}]"
+      >
 
-          <td v-if="editingId === data.id" class="tbody__td td td--editing">
-            <input
-              ref="editFirst"
-              type="text"
-              maxlength="65"
-              v-model.trim="data.name"
-              :class="['tbody__input', 'input',
-                {'input--rejected': this.editStatus === 'empty-input' && data.name.length === 0
-                || this.editStatus === 'invalid-name'},
-                data.name.length === 0 ? 'input--empty' : 'input--filled'
-              ]"
-              @focus="clearStatus"
-              @keydown="handleInput('name')"
-              @keyup="clearStatus"
+        <td v-if="controlModeEdit.id === data.id" class="tbody__cell cell">
+          <input
+            ref="editFirst"
+            type="text"
+            maxlength="65"
+            v-model.trim="data.name"
+            :class="['tbody__input', 'input',
+              controlInput.assignClass('name', data.name, controlValidationTable)
+            ]"
+            :disabled="controlValidationTable.isProcessed()"
+            @focus="controlValidationTable.clearErrors('name')"
+            @keydown="controlInput.manageKeydown('name')"
+          />
+        </td>
+        <td
+          v-else
+          class="tbody__cell cell"
+        >{{ data.name }}</td>
+
+        <td v-if="controlModeEdit.id === data.id" class="tbody__cell cell">
+          <input
+            type="email"
+            maxlength="138"
+            v-model.trim="data.email"
+            :class="['tbody__input', 'input',
+              controlInput.assignClass('email', data.email, controlValidationTable)
+            ]"
+            :disabled="controlValidationTable.isProcessed()"
+            @focus="controlValidationTable.clearErrors('email')"
+            @keydown="controlInput.manageKeydown('email')"
+          />
+        </td>
+        <td v-else class="tbody__cell cell">{{ data.email }}</td>
+
+        <td class="tbody__cell cell">
+          <Transition name="actions-activity" type="animation">
+            <DataStatus
+              v-if="(controlModeEdit.id === data.id || controlModeDelete.id === data.id)"
+              class="status-window"
+              :errors-arr="controlValidationTable.errorsArr"
+              :validation-status="controlValidationTable.get()"
             />
-          </td>
-          <td v-else class="tbody__td td">{{ data.name }}</td>
+          </Transition>
+          <Transition name="actions-activity" mode="out-in" type="animation">
+            <div v-if="!controlModeEdit.get()" class="cell__actions-container actions-container">
+              <button
+                @click="launchEdit(data)"
+                :disabled="controlModeDelete.get() || controlValidationForm.isProcessed()"
+                class="actions-container__action-button action-button button action-button--edit"
+                aria-label="Edit data from this row"
+              >Edit</button>
+              <button
+                @click="$emit('delete:data', data.id)"
+                :disabled="(controlModeDelete.get() && controlModeDelete.id !== data.id) || controlValidationTable.isProcessed() || controlValidationForm.isProcessed()"
+                class="actions-container__action-button action-button button action-button--delete"
+                aria-label="Delete this row"
+              >Delete</button>
+            </div>
+            <div v-else-if="controlModeEdit.id === data.id" class="cell__actions-container actions-container">
+              <button
+                @click="$emit('edit:data', data)"
+                :disabled="controlValidationTable.isProcessed()"
+                class="actions-container__action-button action-button button action-button--save"
+                aria-label="Save changes"
+              >Save</button>
+              <button
+                @click="controlModeEdit.cancelEdit()"
+                :disabled="controlValidationTable.isProcessed()"
+                class="actions-container__action-button action-button button action-button--cancel"
+                aria-label="Cancel changes"
+              >Cancel</button>
+            </div>
+            <div v-else class="cell__actions-container actions-container"></div>
+          </Transition>
+        </td>
 
-          <td v-if="editingId === data.id" class="tbody__td td td--editing">
-            <input
-              type="email"
-              maxlength="138"
-              v-model.trim="data.email"
-              :class="['tbody__input', 'input',
-                {'input--rejected': this.editStatus === 'empty-input' && data.email.length === 0
-                || this.editStatus === 'invalid-email'},
-                data.email.length === 0 ? 'input--empty' : 'input--filled'
-              ]"
-              @focus="clearStatus"
-              @keydown="handleInput('email')"
-              @keyup="clearStatus"
-            />
-          </td>
-          <td v-else class="tbody__td td">{{ data.email }}</td>
+      </tr>
+    </TransitionGroup>
 
-          <td
-            :class="['tbody__td', 'td', {'td--editing': editingId === data.id,
-            'td--not-editing': editingId !== data.id && this.editLaunched}]"
-          >
-            <Transition name="action-buttons" mode="out-in">
-              <div v-if="!editingId" class="td__actions-container actions-container">
-                <button
-                  @click="launchEdit(data)"
-                  class="actions-container__button button--edit"
-                  aria-label="Edit data from this row."
-                >Edit</button>
-                <button
-                  @click="$emit('delete:data', data.id)"
-                  class="actions-container__button button--delete"
-                  aria-label="Delete this row."
-                >Delete</button>
-              </div>
-              <div v-else-if="editingId === data.id" class="td__actions-container actions-container">
-                <button
-                  @click="saveEdit(data)"
-                  class="actions-container__button button--save"
-                  aria-label="Save changes."
-                >Save</button>
-                <button
-                  @click="cancelEdit(data)"
-                  class="actions-container__button button--cancel"
-                  aria-label="Cancel changes."
-                >Cancel</button>
-              </div>
-              <div v-else class="td__actions-container actions-container"></div>
-            </Transition>
-          </td>
-
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
+  </table>
 </template>
 
 <script>
-  import * as checkForm from './../modules/check-form.js'
+  import DataStatus from './DataStatus.vue'
+
+  import { controlValidationTable, controlValidationForm } from './../store/controlValidation.js'
+  import { controlModeDelete, controlModeEdit } from './../store/controlMode.js'
+  import { controlInput } from './../store/controlInput.js'
 
   export default {
     name: 'data-table',
+    components: {
+      DataStatus
+    },
     props: {
       dataCollection: Array
     },
+    emits: ['edit:data', 'delete:data'],
     data() {
       return {
-        editingId: null,
-        cachedData: null,
-        editLaunched: false,
-        editStatus: ''
+        controlValidationTable,
+        controlValidationForm,
+        controlModeEdit,
+        controlModeDelete,
+        controlInput,
+        scrollPositionY: null
       }
+    },
+    deactivated() {
+      if (controlModeEdit.get()) controlModeEdit.cancelEdit()
     },
     methods: {
       launchEdit(data) {
-        this.editLaunched = true
-
-        this.cachedData = Object.assign({}, data)
-        this.editingId = data.id
+        controlModeEdit.set(true, data)
 
         this.$nextTick(() => {
           this.$refs.editFirst[0].focus()
         })
-      },
-
-      cancelEdit(data) {
-        Object.assign(data, this.cachedData)
-        this.editingId = null
-        this.cachedData = null
-
-        this.editLaunched = false
-        this.editStatus = ''
-      },
-
-      saveEdit(data) {
-        if (data.name === '' || data.email === '') {
-          this.editStatus = 'empty-input'
-          return
-        } else if (!checkForm.isNameValid(data.name)) {
-          this.editStatus = 'invalid-name'
-          return
-        } else if (!checkForm.isEmailValid(data.email)) {
-          this.editStatus = 'invalid-email'
-          return
-        }
-
-        this.$emit('edit:data', data.id, data)
-        this.editingId = null
-        this.cachedData = null
-
-        this.editLaunched = false
-        this.editStatus = ''
-      },
-
-      clearStatus() {
-        this.editStatus = ''
-      },
-
-      handleInput(field) {
-        checkForm.handleInput(field)
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
+  @import './../modules/data-input.scss';
+
   %table-border-style {
     border-width: 2px 4px;
     border-style: inset;
-    border-color: Teal;
   }
 
-  .table {
+  .data-table {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    border-color: Teal;
     @extend %table-border-style;
 
-    &__thead {background-color: PeachPuff;}
+    &__thead {background: linear-gradient(0, White, PeachPuff);}
+
     &__caption {
       padding: 10px 10px 5px;
-      background-color: Wheat;
+      border-color: BlueViolet;
+      background: linear-gradient(181deg, LightCyan, Cornsilk, Wheat);
       @extend %table-border-style;
     }
   }
 
-  .caption {
-    text-align: center;
-    font-weight: bold;
-  }
+  .caption--only-message {font-weight: bold;}
 
-  .thead__th,
-  .tbody__td {
+  .cell {
     display: block;
     margin: auto;
     padding-right: 10px;
     padding-left: 10px;
-
-    &:last-child {padding-left: unset;}
   }
 
   .thead {
-    &__th {
+    &__row {border-bottom: 2px ridge SteelBlue;}
+
+    &__cell {
       margin: auto;
       padding-top: 8px;
     }
-
-    &__tr {border-bottom: 2px ridge SteelBlue;}
   }
 
   .tbody {
-    &__td {
-      height: 40px;
-      padding-top: 4px;
-      padding-bottom: 4px;
-      line-height: 2;
-      &:last-child {padding-top: unset; padding-bottom: unset;}
-    }
-
-    &__tr {
+    &__row {
       border-bottom: 1px solid SteelBlue;
+      transition: all 0.25s linear;
 
-      &:last-child {border-bottom: none;}
+      &:last-child {border-bottom: unset;}
 
       &:nth-child(odd) {background-color: Azure;}
       &:nth-child(even) {background-color: LightCyan;}
 
-      &:hover {background-color: rgb(106, 90, 205, 0.2);}
+      &:hover {background-color: rgba(238, 130, 238, 0.4);}
+    }
+
+    &__cell {
+      min-height: 40px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      line-height: 2;
     }
 
     &__input {
       width: 100%;
-      padding: 3px 5px 0;
+      padding: 3px 5px 1px;
       border-width: 3px;
       border-style: inset;
       font-size: 16px;
     }
   }
 
-  .td {
-    &--editing {
-      padding-right: 3px;
-      padding-left: 3px;
-      background-color: SlateBlue;
-    }
-    &--not-editing {
-      background-color: rgb(106, 90, 205, 0.3);
-      transition: all 0.25s linear;
-    }
-  }
-
-  @media screen and (min-width: 500px) {
-    .thead__th,
-    .tbody__td {
-      &:last-child {
-        display: table-cell;
-      }
-    }
-
-    .thead__th {
-      width: 70%;
-
-      &:last-child {width: 30%;}
-    }
-  }
-
-  @media screen and (min-width: 700px) {
-    .thead__th,
-    .tbody__td {
-      display: table-cell;
-    }
-
-    .thead {
-      &__th {
-        width: 40%;
-        padding-top: 10px;
-        padding-bottom: 5px;
-        text-align: left;
-
-        &:last-child {width: 20%; text-align: center;}
-      }
-    }
-
-    .tbody__input {width: 100%;}
+  .row--editing {
+    padding: 5px 3px;
+    background-color: SlateBlue !important;
   }
 
   .actions-container {
@@ -290,19 +233,18 @@
     align-items: center;
     gap: 8px;
 
-    &__button {
+    &__action-button {
       padding: 6px 5px 2px;
-      border: 1px ridge RosyBrown;
-      border-radius: 8px;
       font-size: 0.9em;
-
-      &:hover {
-        background-color: White;
-      }
     }
   }
 
-  .button {
+  .action-button {
+    border: 1px ridge RosyBrown;
+    border-radius: 8px;
+
+    &:hover {background-color: Beige;}
+
     &--edit {background-color: Wheat;}
     &--delete {background-color: BurlyWood;}
 
@@ -310,25 +252,136 @@
     &--cancel {background-color: LightPink;}
   }
 
-  .action-buttons-enter-active {
-    animation: toggle-on-x 1s;
+  .status-window {
+    margin-bottom: 5px;
+    padding: 8px 15px 5px;
+    border: 2px groove SlateBlue;
+    border-radius: 15px;
+    line-height: 1;
+    font-size: 0.85em;
+    background: White;
+
+    &:before {margin-bottom: 5px;}
   }
-  .action-buttons-leave-active {
-    animation: toggle-on-x 0.5s reverse;
+
+  @media screen and (min-width: 500px) {
+    .cell {
+      &:last-child {
+        display: table-cell;
+      }
+    }
+
+    .thead__cell {
+      width: 60%;
+
+      &:last-child {
+        width: 40%;
+        padding-right: 5%;
+        text-align: right;
+      }
+    }
+    .actions-container {
+      padding-right: 5%;
+      justify-content: flex-end;
+    }
+
+    .status-window {border-bottom-right-radius: 0;}
+  }
+
+  @media screen and (min-width: 700px) {
+    .cell {
+      display: table-cell;
+      text-align: left;
+    }
+
+    .thead {
+      &__cell {
+        padding-top: 10px;
+        padding-bottom: 5px;
+
+        &:last-child {padding-right: 4%;}
+      }
+    }
+
+    .tbody__input {width: 100%;}
+  }
+
+  @media screen and (min-width: 1500px) {
+    .thead {
+      &__cell {width: 45%;}
+      &:last-child {width: 10%;}
+    }
+  }
+
+  @media print {
+    .data-table {margin-bottom: 55px;}
+
+    .cell {
+      display: table-cell;
+      text-align: left;
+    }
+
+    .cell:last-child {
+      display: none;
+    }
+  }
+
+  /*------------------ Animations ------------------*/
+  //--------- table-header
+  .table-header {
+      &-enter,
+      &-leave {
+        &-active {transition: all 1s linear;}
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+        font-size: 0em;
+      }
+
+      &-enter-to,
+      &-leave-from {
+        opacity: 0.8;
+      }
+    }
+
+  //--------- row-activity
+  .row-activity {
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+
+    &-enter-from {
+      font-size: 0em;
+      transform: translateY(-200px) rotate(80deg) scaleX(0.1);
+    }
+    &-enter-active {
+      background: linear-gradient(
+        90deg,
+        Violet, PeachPuff, SpringGreen
+      ) !important;
+      opacity: 0.5;
+      transition: transform 1.1s ease-out;
+    }
+    &-enter-to {opacity: 0.9;}
+
+    &-leave-active {
+      background-color: SlateBlue !important;
+      transform: scaleY(0.1);
+      transition: all 0.5s ease;
+    }
+  }
+
+  //--------- actions-activity
+  .actions-activity {
+    &-enter-active {animation: toggle-on-x 0.4s;}
+    &-leave-active {animation: toggle-on-x 0.4s reverse;}
   }
 
   @keyframes toggle-on-x {
-    0% {transform: translateX(-8px);}
-    50% {transform: translateX(8px);}
+    0% {transform: translateX(-15px);}
     100% {transform: translateX(0);}
-  }
-
-  .action-buttons-enter-from {
-    opacity: 0;
-    transform: translateX(-8px);
-  }
-
-  .action-buttons-leave-to {
-    transform: translateX(8px);
   }
 </style>

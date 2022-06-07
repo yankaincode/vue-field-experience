@@ -1,0 +1,27 @@
+.input {
+  border-color: SteelBlue;
+  border-radius: 8px;
+  transition: .4s linear;
+
+  &:focus {
+    border-color: RoyalBlue;
+    background-color: White !important;
+  }
+  &:hover {background-color: LavenderBlush;}
+
+  &:disabled {
+    border-color: SlateBlue !important;
+    background: linear-gradient(5deg, Thistle, Lavender, White, Thistle) !important;
+    opacity: 0.9;
+  }
+
+  &--empty {background-color: Lavender;}
+  &--filled {background-color: AntiqueWhite;}
+
+  &--rejected {
+    border-color: Crimson;
+    background-color: Pink;
+
+    &:hover {background-color: MistyRose;}
+  }
+}
