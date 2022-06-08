@@ -24,6 +24,9 @@ const controlValidation = {
   isProcessed() {
     return (['pending', 'fulfilled'].includes(this.get()))
   },
+  isError() {
+    return ['network-error', 'fatal-error', 'rejected'].includes(this.status)
+  },
 
   nullEndpointStatus() {
     if (['network-error', 'fatal-error', 'rejected', 'fulfilled'].includes(this.get())) this.set('')

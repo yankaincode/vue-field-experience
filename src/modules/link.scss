@@ -1,9 +1,9 @@
 .link {
-  border-radius: 5px;
   font-weight: bold;
   text-decoration: none;
   color: MediumBlue;
 
   &:hover {color: RoyalBlue;}
   &:active {color: Blue;}
+  &:focus {border-radius: 5px;}
 }

@@ -4,26 +4,28 @@
 
       <header class="header-container">
         <nav class="header-container__nav-bar nav-bar">
-          <button
-            v-for="tab in tabs"
-            :key="tab"
-            @click="currentTab = tab"
-            :class="['nav-bar__tab-button', 'tab-button',
-            {'tab-button--active' : currentTab === tab}]"
-            :aria-label="assignAriaLabel(tab)"
-          >
-            {{tab}}
-          </button>
+          <a
+           v-for="tab in tabs"
+           :key="tab"
+           :href="tab.href"
+           :class="['nav-bar__tab-link', 'tab-link', 'link',
+           {'tab-link--active' : isTabActive(tab.href)}]"
+           :aria-label="assignTitleAndLabel(tab.href, tab.title)"
+         >
+           {{tab.title}}
+         </a>
         </nav>
       </header>
 
       <main class="main-container">
-        <h1 class="main-container__tab-title tab-title">{{currentTab}}</h1>
-        <Transition name="tab-toggle" mode="out-in" type="transition" duration="300" appear="appear">
+        <h1 class="main-container__page-title page-title">
+          {{ currentView.title }}
+        </h1>
+        <Transition name="page-toggle" mode="out-in" type="transition" duration="300" appear="appear">
           <KeepAlive>
             <component
-              :is="currentTab"
-              class="main-container__tab-content tab-content"
+              :is="currentView"
+              class="main-container__page-content page-content"
             ></component>
           </KeepAlive>
         </Transition>
@@ -38,8 +40,8 @@
             ></path>
           </a>
         </svg>
-        <p class="footer-container__p">Coded by <a href="https://yankaincode.com/" target="_blank" rel="noopener"  class="link link--Yanka">Yanka_InCode</a></p>
-        <p class="footer-container__p">Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
+        <p class="footer-container__p-item p-item">Coded by <a href="https://yankaincode.com/" target="_blank" rel="noopener"  class="link link--Yanka">Yanka_InCode</a></p>
+        <p class="footer-container__p-item p-item">Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
       </footer>
     </div>
 
@@ -47,24 +49,56 @@
 </template>
 
 <script>
-  import About from '@/components/About.vue'
-  import Data from '@/components/Data.vue'
+  import AboutTab from '@/components/AboutTab.vue'
+  import DataTab from '@/components/DataTab.vue'
+  import BrokenLink from '@/components/BrokenLink.vue'
+
+  const routes = {
+    '/' : AboutTab,
+    '/about': AboutTab,
+    '/data-exchange': DataTab
+  }
 
   export default {
     name: 'app',
     components: {
-      About,
-      Data
+      AboutTab,
+      DataTab,
+      BrokenLink
     },
     data() {
       return {
-        currentTab: 'About',
-        tabs: ['About', 'Data']
+        currentTab: window.location.hash,
+        tabs: [
+          {title: AboutTab.title, href: '#/about'},
+          {title: DataTab.title, href: '#/data-exchange'}
+        ]
       }
     },
+    computed: {
+      currentView() {
+        return routes[this.currentTab.slice(1) || '/'] || BrokenLink
+      }
+    },
+    mounted() {
+      // A workaround for just opened 'About' page to make the appropriate tab active and update the title of the window
+      window.location.hash = '#/about'
+
+      window.addEventListener('hashchange', () => {
+	  	  this.currentTab = window.location.hash
+	    })
+    },
     methods: {
-      assignAriaLabel(tab) {
-        return (tab === this.currentTab) ? `The ${tab} tab is opened.` : `Open the ${tab} tab.`
+      assignTitleAndLabel(tabHref, tabTitle) {
+        const isTabActive = tabHref === this.currentTab
+        if (isTabActive) document.title = `${tabTitle}`
+        console.log(this.currentTab)
+
+        return (isTabActive) ? `The '${tabTitle}' page is opened` : `Open '${tabTitle}' page`
+      },
+
+      isTabActive(tabHref) {
+        return tabHref === this.currentTab
       }
     }
   }
@@ -72,6 +106,7 @@
 
 <style lang="scss">
   @import "./library.blocks/css-normalize/css-normalize.scss";
+  @import './modules/cross-browser-templates.scss';
   @import './modules/selection-vs-focus.scss';
   @import './modules/section.scss';
   @import './modules/link.scss';
@@ -84,14 +119,7 @@
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
-
-    //Break long words
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    @extend %break-long-words;
   }
 
   .window-container {
@@ -105,21 +133,28 @@
   }
 
   .nav-bar {
-    &__tab-button {
-      width: 100px;
-      margin-left: 10px;
-      padding: 10px 10px 15px;
-      font-size: 1.1em;
+    display: flex;
+    margin-right: 12px;
+    margin-left: 12px;
 
-      &:first-child {margin-left: 20px;}
+    &__tab-link {
+      min-width: 100px;
+      max-width: 150px;
+      margin-right: 5px;
+      padding: 10px 15px 15px;
+      font-size: 1.1em;
+      @extend %no-user-select;
+
+      &:last-child {margin-right: unset;}
     }
   }
 
-  .tab-button {
+  .tab-link {
     z-index: 5;
     position: relative;
     top: 10px;
     border-radius: 5px 5px 0 0;
+    text-align: center;
     color: Navy;
     background: linear-gradient(90deg, Turquoise, Aquamarine, White);
     box-shadow: 0 0 4px 2px SlateBlue;
@@ -150,20 +185,17 @@
     box-shadow:
       -1px 1px 6px SlateBlue,
       1px -1px 6px SlateBlue;
-
-    &__tab-title {}
-    &__tab-content {}
   }
 
-  .tab-title {
+  .page-title {
     margin: 0;
-    padding: 20px 0 5px;
+    padding: 20px 10px 5px;
     border-radius: 13px 13px 0 0;
     text-align: center;
     color: white;
     background-color: Teal;
   }
-  .tab-content {
+  .page-content {
     min-height: 200px;
     padding: 10px 5px 15px;
   }
@@ -178,7 +210,7 @@
     background-color: rgba(255, 250, 240, 0.9);
     box-shadow: 0 0 2px 2px SlateBlue;
 
-    &__p {
+    &__p-item {
       padding: 2px 0;
       line-height: 1.4;
       font-size: .8em;
@@ -218,26 +250,25 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      margin-left: 20px;
+      margin-right: 0;
 
-      &__tab-button {
+      &__tab-link {
         width: 130px;
-        margin: unset;
-        margin-top: 8px;
+        margin-right: unset;
+        margin-bottom: 5px;
         padding: 15px 15px 10px;
 
-        &:first-child {
-          margin: unset;
-          margin-top: 35px;
-        }
+        &:first-child {margin-top: 35px;}
+        &:last-child {margin-bottom: unset;}
       }
     }
 
-    .tab-button {
+    .tab-link {
       top: 0;
       left: 15px;
       padding-right: 30px;
       border-radius: 5px 0 0 5px;
+      text-align: left;
 
       &:hover {left: 0;}
 
@@ -247,7 +278,7 @@
       }
     }
 
-    .tab-content {
+    .page-content {
       padding-right: 15px;
       padding-left: 15px;
     }
@@ -258,19 +289,19 @@
       border-radius: 0 25px 25px 0;
       text-align: unset;
 
-      &__p {padding-bottom: 10px;}
-      &__p:last-child {padding-bottom: unset;}
+      &__p-item {padding-bottom: 10px;}
+      &__p-item:last-child {padding-bottom: unset;}
     }
   }
 
   @media screen and (min-width: 1900px) {
-    .nav-bar__tab-button {width: 160px;}
+    .nav-bar__tab-link {width: 160px;}
     .window-container {max-width: 1400px;}
   }
 
   /*------------------ Animations ------------------*/
-  //--------- tab-toggle
-  .tab-toggle {
+  //--------- page-toggle
+  .page-toggle {
     &-enter,
     &-leave {
       &-active {transition: opacity 0.25s ease-out;}

@@ -11,6 +11,10 @@
     text-align: justify;
   }
 }
+.content {
+  &__p-item {padding-top: 15px;}
+  &__p-item:first-child {padding-top: unset;}
+}
 
 @media screen and (min-width: 500px) {
   .section__content {

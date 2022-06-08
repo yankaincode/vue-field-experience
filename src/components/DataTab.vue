@@ -1,26 +1,33 @@
 <template>
   <div v-if="downloadStatus !== 'fulfilled'"
-    :class="[ 'data-tab', 'data-tab--downloader',
+    :class="[ 'data-tab', 'data-tab-downloader',
       {'data-tab--rejected': downloadStatus === 'rejected',
       'data-tab--pending': downloadStatus === 'pending'}
     ]"
   >
-    <p v-if="downloadStatus === 'pending'" class="data-tab__p">
-      Loading process is launched. Please, wait a bit...
-    </p>
-    <div v-else>
-      <p class="data-tab--downloader__p p">
-        Sorry, we've met a download error.
-        <br />Check your connection to the Internet. If it's alright, please inform me of this incident by e-mail on <a class="link" href="mailto:support@yankaincode.com?subject=Data tab: A download error &body=I've tried to open Data tab, but it didn't download, and it wasn't the Internet connection issue.">support@yankaincode.com</a>.
+    <Transition name="show-up" type="transition" mode="out-in" appear>
+      <p v-if="downloadStatus === 'pending'" class="data-tab__p-item p-item">
+        Loading process is launched. Please, wait a bit...
       </p>
-      <button @click="getData" class="data-tab--downloader__button button">Update the page</button>
-    </div>
+      <div v-else>
+        <p class="data-tab--rejected__p-item p-item">Sorry, it's a  download error. Some possible solutions:</p>
+        <ul class="data-tab--rejected__ul-list ul-list">
+          <li>check your connection to the Internet;</li>
+          <li>update the page;</li>
+          <li>try to retrieve data by the button below.</li>
+        </ul>
+        <button @click="getData" class="data-tab--rejected__button button">Retrieve data from the server again</button>
+        <p class="data-tab--rejected__p-item p-item">
+          If nothing has changed, please inform me of this incident by e-mail on <a class="link" href="mailto:support@yankaincode.com?subject=Error Report | Vue project by Yanka_Incode &body=I've tried to open Data tab, but it didn't download.%0AIt wasn't the Internet connection issue.%0AReload of the website and try to retrieve data from the server again by an appropriate button didn't help.">support@yankaincode.com</a>.
+        </p>
+      </div>
+    </Transition>
   </div>
 
   <div v-else class="data-tab">
     <section class="data-tab__section section">
       <h2 class="section__title title">Data form</h2>
-      <Transition name="form-show-up" type="transition" appear>
+      <Transition name="show-up" type="transition" appear>
         <KeepAlive>
           <DataForm
             @add:data="addData"
@@ -67,6 +74,7 @@
 
   export default {
     name: 'data-tab',
+    title: 'Project: Data Exchange',
     components: {
       DataForm,
       DataStatus,
@@ -104,10 +112,12 @@
             this.dataCollection = request.data
             this.dataLastExistedId = this.dataCollection.length
             this.dataDownloadedLength = this.dataCollection.length
-          }, 600)
+          }, 2500)
 
         } catch (error) {
-          this.downloadStatus = 'rejected'
+          await setTimeout( () => {
+            this.downloadStatus = 'rejected'
+          }, 2500)
         }
       },
 
@@ -207,13 +217,17 @@
 
           await setTimeout(() => {
             this.dataCollection = this.dataCollection.filter(data => data.id !== id)
-            controlValidationTable.set('')
-            controlModeDelete.set(false)
           }, 1500)
 
         } catch(error) {
           controlValidationTable.set(this.setErrorType(error))
-          await setTimeout( () => { controlModeDelete.set(false) }, 5000)
+
+        } finally {
+          const timing = (controlValidationTable.get() === 'fulfilled') ? 1500 : 5000
+          await setTimeout( () => {
+            controlValidationTable.set('')
+            controlModeDelete.set(false)
+          }, timing)
         }
       },
 
@@ -231,42 +245,58 @@
 </script>
 
 <style scoped lang="scss">
-  .data-tab--downloader {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 20px;
-    border-radius: 0 0 15px 15px;
-    font-weight: bold;
-
-    &__p {text-align: center;}
-
-    &__button {
-      padding: 8px 15px 5px;
-      background-color: LightCyan;
-    }
-  }
+  @import './../modules/lists.scss';
 
   .data-tab {
-    &--rejected {
-      background: linear-gradient(180deg, Lavender, MistyRose);
+    &-downloader {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      border-radius: 0 0 15px 15px;
+      font-weight: bold;
+      text-align: center;
     }
+
     &--pending {
       background: linear-gradient(180deg, Honeydew, Khaki);
+    }
+
+    &--rejected {
+      background: linear-gradient(180deg, Lavender, MistyRose);
+
+      &__button {
+        border: 2px ridge SlateBlue;
+        border-radius: 10px;
+        margin-top: 5px;
+        padding: 8px 15px 5px;
+        background-color: LightCyan;
+
+        &:hover {background-color: Cornsilk;}
+      }
+      &__p-item {
+        padding-top: 30px;
+        padding-bottom: 10px;
+      }
     }
   }
 
   /*------------------ Animations ------------------*/
-  //--------- form-show-up
-  .form-show-up {
+  //--------- show-up
+  .show-up {
     &-enter-active {transition: all 0.3s ease-out;}
+    &-leave-active {transition: all 0.2s ease-in-out;}
 
-    &-enter-from {
+    &-enter-from,
+    &-leave-to {
       font-size: 0em;
       transform: translateY(-20px);
       opacity: 0.1;
     }
-    &-enter-to {opacity: 0.8;}
+    &-enter-to,
+    &-leave-from {
+      opacity: 0.8;
+    }
   }
 </style>

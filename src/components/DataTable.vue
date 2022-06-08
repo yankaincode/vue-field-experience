@@ -80,7 +80,10 @@
               >Edit</button>
               <button
                 @click="$emit('delete:data', data.id)"
-                :disabled="(controlModeDelete.get() && controlModeDelete.id !== data.id) || controlValidationTable.isProcessed() || controlValidationForm.isProcessed()"
+                :disabled="(controlModeDelete.get() && controlModeDelete.id !== data.id)
+                || controlValidationTable.isProcessed()
+                || controlValidationForm.isProcessed()
+                || controlValidationTable.isError()"
                 class="actions-container__action-button action-button button action-button--delete"
                 aria-label="Delete this row"
               >Delete</button>

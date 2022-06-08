@@ -5,6 +5,7 @@
   border: 2px dotted Purple;
   border-radius: 50%;
   fill: MediumBlue;
+  @extend %no-user-select;
 
   &__svg-link {
     &:hover {fill: RoyalBlue;}
