@@ -157,7 +157,7 @@
   @import './../modules/data-input.scss';
 
   %table-border-style {
-    border-width: 2px 4px;
+    border-width: 0.1em 0.25em;
     border-style: inset;
   }
 
@@ -171,7 +171,7 @@
     &__thead {background: linear-gradient(0, White, PeachPuff);}
 
     &__caption {
-      padding: 10px 10px 5px;
+      padding: 0.6em 0.6em 0.3em;
       border-color: BlueViolet;
       background: linear-gradient(181deg, LightCyan, Cornsilk, Wheat);
       @extend %table-border-style;
@@ -183,22 +183,22 @@
   .cell {
     display: block;
     margin: auto;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 0.65em;
+    padding-left: 0.65em;
   }
 
   .thead {
-    &__row {border-bottom: 2px ridge SteelBlue;}
+    &__row {border-bottom: 0.1em ridge SteelBlue;}
 
     &__cell {
       margin: auto;
-      padding-top: 8px;
+      padding-top: 0.5em;
     }
   }
 
   .tbody {
     &__row {
-      border-bottom: 1px solid SteelBlue;
+      border-bottom: 0.1em solid SteelBlue;
       transition: all 0.25s linear;
 
       &:last-child {border-bottom: unset;}
@@ -218,15 +218,14 @@
 
     &__input {
       width: 100%;
-      padding: 3px 5px 1px;
-      border-width: 3px;
+      padding: 0.25em 0.35em 0.1em;
+      border-width: 0.2em;
       border-style: inset;
-      font-size: 16px;
     }
   }
 
   .row--editing {
-    padding: 5px 3px;
+    padding: 0.3em 0.2em;
     background-color: SlateBlue !important;
   }
 
@@ -234,17 +233,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 0.5em;
 
-    &__action-button {
-      padding: 6px 5px 2px;
-      font-size: 0.9em;
-    }
+    &__action-button {padding: 0.35em 0.3em 0.1em;}
   }
 
   .action-button {
-    border: 1px ridge RosyBrown;
-    border-radius: 8px;
+    border: 0.1em ridge RosyBrown;
+    border-radius: 0.5em;
 
     &:hover {background-color: Beige;}
 
@@ -256,12 +252,11 @@
   }
 
   .status-window {
-    margin-bottom: 5px;
-    padding: 8px 15px 5px;
-    border: 2px groove SlateBlue;
-    border-radius: 15px;
+    margin-bottom: 0.35em;
+    padding: 0.5em 0.95em 0.15em;
+    border: 0.15em groove SlateBlue;
+    border-radius: 0.95em;
     line-height: 1;
-    font-size: 0.85em;
     background: White;
 
     &:before {margin-bottom: 5px;}
@@ -384,7 +379,7 @@
   }
 
   @keyframes toggle-on-x {
-    0% {transform: translateX(-15px);}
+    0% {transform: translateX(-1.1em);}
     100% {transform: translateX(0);}
   }
 </style>

@@ -78,14 +78,12 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    padding-bottom: 10px;
 
     &__input {
       width: 100%;
-      max-width: 450px;
-      margin-bottom: 15px;
-      padding: 7px 10px;
-      border-width: 6px;
+      margin-bottom: 1.1em;
+      padding: 0.4em 0.65em;
+      border-width: 0.4em;
       border-style: outset;
     }
 
@@ -94,15 +92,15 @@
     }
 
     &__submit-button {
-      margin-top: 10px;
-      padding: 10px 25px 5px;
+      margin-top: 0.7em;
+      margin-bottom: 0.7em;
+      padding: 0.6em 1.6em 0.3em;
     }
   }
 
   .submit-button {
-    border: 3px outset SlateBlue;
-    border-radius: 10px;
-    font-size: 1em;
+    border: 0.2em outset SlateBlue;
+    border-radius: 0.6em;
     background: linear-gradient(
       90deg,
       Khaki, MintCream, PaleGreen
@@ -132,6 +130,10 @@
 
   @media screen and (min-width: 700px) {
     .form__input {width: 60%;}
+  }
+
+  @media screen and (min-width: 2048px) {
+    .form__input {width: 40%;}
   }
 
   @media print {

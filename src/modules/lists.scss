@@ -2,23 +2,23 @@
   &--string {
     & li {
       display: block;
-      &:before {padding: 0 5px 0 20px;}
+      &:before {padding: 0 0.3em 0 1.3em;}
     }
   }
 
-  &--roll {padding-left: 20px;}
+  &--roll {padding-left: 2.5em;}
 }
 
 @media screen and (min-width: 500px) {
   .ul-list {
     &--string {
       text-align: center;
-      
+
       & li {display: inline-block;}
     }
   }
 }
 
 @media screen and (min-width: 700px) {
-  .ul-list--roll {padding-left: 60px;}
+  .ul-list--roll {padding-left: 4em;}
 }

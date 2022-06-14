@@ -92,7 +92,6 @@
       assignTitleAndLabel(tabHref, tabTitle) {
         const isTabActive = tabHref === this.currentTab
         if (isTabActive) document.title = `${tabTitle}`
-        console.log(this.currentTab)
 
         return (isTabActive) ? `The '${tabTitle}' page is opened` : `Open '${tabTitle}' page`
       },
@@ -112,10 +111,15 @@
   @import './modules/link.scss';
   @import './modules/svg.scss';
 
+  $majorFontSize: 1em;
+
   .body-container {
     height: 100%;
+    background: repeating-linear-gradient(
+      35deg, White 0em, LightCyan 10em, Aquamarine 20em, MediumSlateBlue 30em, Violet 40em, Pink 50em, Cornsilk 60em, Ivory 70em, White 80em
+    );
     background-image: url('./assets/ViolaIgua-background.png');
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
@@ -125,24 +129,26 @@
   .window-container {
     display: flex;
     flex-direction: column;
-    max-width: 1300px;
-    padding: 15px 0;
+    padding: 0.5em 0;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: $majorFontSize;
     color: MidnightBlue;
+  }
+
+  .header-container {
+    margin-right: 1em;
+    margin-left: 1em;
   }
 
   .nav-bar {
     display: flex;
-    margin-right: 12px;
-    margin-left: 12px;
 
     &__tab-link {
       min-width: 100px;
       max-width: 150px;
-      margin-right: 5px;
-      padding: 10px 15px 15px;
-      font-size: 1.1em;
+      margin-right: 0.3em;
+      padding: 0.5em 0.7em 0.7em;
+      font-size: $majorFontSize + 0.1em;
       @extend %no-user-select;
 
       &:last-child {margin-right: unset;}
@@ -152,12 +158,12 @@
   .tab-link {
     z-index: 5;
     position: relative;
-    top: 10px;
-    border-radius: 5px 5px 0 0;
+    top: 0.4em;
+    border-radius: 0.5em 0.5em 0 0;
     text-align: center;
     color: Navy;
     background: linear-gradient(90deg, Turquoise, Aquamarine, White);
-    box-shadow: 0 0 4px 2px SlateBlue;
+    box-shadow: 0 0 0.3em 0.1em SlateBlue;
     transition: all 0.2s linear;
 
     &:hover {
@@ -167,53 +173,53 @@
 
     &--active {
       background: linear-gradient(90deg, Wheat, White);
-      box-shadow: 0 0 4px 2px SaddleBrown;
+      box-shadow: 0 0 0.3em 0.1em SaddleBrown;
 
       &:hover {
         background: linear-gradient(130deg, Wheat, White, FloralWhite, Wheat, RosyBrown);
-        top: 10px;
+        top: 0.4em;
       }
     }
   }
 
   .main-container {
     z-index: 10;
-    padding: 5px;
-    border-radius: 15px;
+    padding: 0.3em;
+    border-radius: 1em;
     line-height: 1.8;
     background-color: Snow;
     box-shadow:
-      -1px 1px 6px SlateBlue,
-      1px -1px 6px SlateBlue;
+      -0.1em 0.1em 0.3em SlateBlue,
+      0.1em -0.1em 0.3em SlateBlue;
   }
 
   .page-title {
     margin: 0;
-    padding: 20px 10px 5px;
-    border-radius: 13px 13px 0 0;
+    padding: 0.5em 0.6em 0.1em;
+    border-radius: 0.45em 0.45em 0 0;
     text-align: center;
     color: white;
     background-color: Teal;
   }
   .page-content {
-    min-height: 200px;
-    padding: 10px 5px 15px;
+    min-height: 250px;
+    padding: 0.7em 0.5em 0.8em;
   }
 
   .footer-container {
     width: 80%;
     max-width: 500px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 0.8em;
     text-align: center;
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 1em 1em;
     background-color: rgba(255, 250, 240, 0.9);
-    box-shadow: 0 0 2px 2px SlateBlue;
+    box-shadow: 0 0 0.4em 0.1em SlateBlue;
 
     &__p-item {
-      padding: 2px 0;
+      padding: 0.1em 0;
       line-height: 1.4;
-      font-size: .8em;
+      font-size: 0.8em;
       font-weight: bold;
     }
 
@@ -227,23 +233,25 @@
     &--Yanka,
     &--Viola {
       text-shadow:
-        0 2px 5px white,
-        0 -2px 5px white,
-        -2px 0 5px white,
-        2px 0 5px white;
+        0 0.1em 0.4em white,
+        0 -0.1em 0.4em white,
+        -0.1em 0 0.4em white,
+        0.1em 0 0.4em white;
     }
   }
 
   @media screen and (min-width: 1000px) {
     .window-container {
       flex-direction: row;
+      max-width: 1300px;
       margin: 0 auto;
     }
-    .main-container {flex: 2 0 700px;}
+    .main-container {flex: 5 1 800px;}
+    .header-container  {margin-right: unset;}
 
-    .nav-bar,
+    .header-container,
     .footer-container {
-      flex: 0 1 140px;
+      flex: 0 1 150px;
     }
 
     .nav-bar {
@@ -253,50 +261,83 @@
       margin-right: 0;
 
       &__tab-link {
-        width: 130px;
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
         margin-right: unset;
-        margin-bottom: 5px;
-        padding: 15px 15px 10px;
+        margin-bottom: 0.3em;
+        padding: 0.5em 0.5em 0.3em;
 
-        &:first-child {margin-top: 35px;}
+        &:first-child {margin-top: 1em;}
         &:last-child {margin-bottom: unset;}
       }
     }
 
     .tab-link {
       top: 0;
-      left: 15px;
-      padding-right: 30px;
-      border-radius: 5px 0 0 5px;
+      left: 0.5em;
+      padding-right: 1em;
+      border-radius: 0.5em 0 0 0.5em;
       text-align: left;
 
       &:hover {left: 0;}
 
       &--active:hover {
         top: 0;
-        left: 15px;
+        left: 0.5em;
       }
     }
 
     .page-content {
-      padding-right: 15px;
-      padding-left: 15px;
+      min-height: 280px;
+      padding-right: 1em;
+      padding-left: 1em;
     }
 
     .footer-container {
-      width: 90%;
-      margin: auto 15px 20px 0;
-      border-radius: 0 25px 25px 0;
+      width: unset;
+      margin: auto 1em 1.5em 0;
+      border-radius: 0 1.5em 1.5em 0;
       text-align: unset;
 
-      &__p-item {padding-bottom: 10px;}
+      &__p-item {padding-bottom: 0.8em;}
       &__p-item:last-child {padding-bottom: unset;}
     }
   }
 
-  @media screen and (min-width: 1900px) {
-    .nav-bar__tab-link {width: 160px;}
-    .window-container {max-width: 1400px;}
+  @media screen and (min-width: 2048px) {
+    .window-container {
+      max-width: 2000px;
+      font-size: $majorFontSize + 0.5em;
+    }
+
+    .header-container,
+    .footer-container {
+      flex-basis: 250px;
+    }
+    .page-content {min-height: 400px;}
+  }
+  @media screen and (min-width: 3840px) {
+    .window-container {
+      max-width: 3300px;
+      font-size: $majorFontSize + 1.5em;
+    }
+    .header-container,
+    .footer-container {
+      flex-basis: 400px;
+    }
+    .page-content {min-height: 600px;}
+  }
+  @media screen and (min-width: 5120px) {
+    .window-container {
+      max-width: 4200px;
+      font-size: $majorFontSize + 2.2em;
+    }
+    .header-container,
+    .footer-container {
+      flex-basis: 550px;
+    }
+    .page-content {min-height: 750px;}
   }
 
   /*------------------ Animations ------------------*/
@@ -315,12 +356,12 @@
 
   //--------- svg-box-shadow
   @keyframes svg-box-shadow {
-    0% {box-shadow: 0 0 3px 2px DodgerBlue;}
-    20% {box-shadow: 0 0 3px 2px SpringGreen;}
-    40% {box-shadow: 0 0 3px 2px Aquamarine;}
-    60% {box-shadow: 0 0 3px 2px Yellow;}
-    80% {box-shadow: 0 0 3px 2px Magenta;}
-    90% {box-shadow: 0 0 3px 2px MediumSlateBlue;}
-    100% {box-shadow: 0 0 3px 2px DodgerBlue;}
+    0% {box-shadow: 0 0 0.3em 0.1em DodgerBlue;}
+    20% {box-shadow: 0 0 0.3em 0.1em SpringGreen;}
+    40% {box-shadow: 0 0 0.3em 0.1em Aquamarine;}
+    60% {box-shadow: 0 0 0.3em 0.1em Yellow;}
+    80% {box-shadow: 0 0 0.3em 0.1em Magenta;}
+    90% {box-shadow: 0 0 0.3em 0.1em MediumSlateBlue;}
+    100% {box-shadow: 0 0 0.3em 0.1em DodgerBlue;}
   }
 </style>

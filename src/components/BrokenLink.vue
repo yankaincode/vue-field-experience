@@ -1,6 +1,6 @@
 <template>
   <div class="broken-link">
-    <section class="broken-link__section section">
+    <section class="broken-link__section section ">
       <h2 class="section__title title">Oh, it's 404 error!</h2>
       <div class="section__content content">
         <p class="content__p-item p-item">
@@ -22,10 +22,7 @@
 <style scoped lang="scss">
   .broken-link__section {
     & .title {background: linear-gradient(90deg, Pink, PowderBlue);}
-    & .content {
-      min-height: 105px;
-      margin-top: 30px;
-    }
+    & .content {margin-top: 2em;}
     & .p-item {text-align: center;}
   }
 </style>
