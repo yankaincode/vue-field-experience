@@ -1,6 +1,8 @@
 <template>
   <div :class="['data-status', assignStatusClass]">
-    <p v-if="this.status !== 'rejected' || errorsArr.length === 0">
+    <p v-if="this.status !== 'rejected' || errorsArr.length === 0"
+      class="data-status__p-item p-item"
+    >
       {{ assignStatusMessage() }}
     </p>
     <ol v-else :class="['data-status__errors-ol', 'errors-ol',

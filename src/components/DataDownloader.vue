@@ -56,7 +56,10 @@
     font-weight: bold;
     text-align: center;
 
-    &--pending {background: linear-gradient(180deg, Honeydew, Khaki);}
+    &--pending {
+      background: linear-gradient(180deg, Honeydew, Khaki);
+      cursor: wait;
+    }
     &--rejected {background: linear-gradient(180deg, Lavender, MistyRose);}
 
     & .p-item {

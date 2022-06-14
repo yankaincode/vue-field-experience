@@ -34,5 +34,6 @@ input[type="submit"] {
   &:disabled {
     color: DarkSlateGrey;
     opacity: 0.8;
+    cursor: not-allowed;
   }
 }

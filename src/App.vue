@@ -1,8 +1,10 @@
 <template>
-  <div class="body-container">
-    <div class="window-container">
+  <div class="app">
+    <div class="app__background-container background-container"></div>
 
-      <header class="header-container">
+    <div class="app__window-container window-container">
+
+      <header class="window-container__header-container header-container">
         <nav class="header-container__nav-bar nav-bar">
           <a
            v-for="tab in tabs"
@@ -17,7 +19,7 @@
         </nav>
       </header>
 
-      <main class="main-container">
+      <main class="window-container__main-container main-container">
         <h1 class="main-container__page-title page-title">
           {{ currentView.title }}
         </h1>
@@ -31,7 +33,7 @@
         </Transition>
       </main>
 
-      <footer class="footer-container">
+      <footer class="window-container__footer-container footer-container">
         <svg class="footer-container__svg svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <a xlink:href="https://github.com/" target="_blank" rel="noopener" class="svg__svg-link svg-link" aria-label="View the code source of the project on GitHub">
             <rect class="svg-link__rect"></rect>
@@ -42,6 +44,9 @@
         </svg>
         <p class="footer-container__p-item p-item">Coded by <a href="https://yankaincode.com/" target="_blank" rel="noopener"  class="link link--Yanka">Yanka_InCode</a></p>
         <p class="footer-container__p-item p-item">Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
+        <p class="footer-container__p-item p-item p-item--copy">&copy;
+          2022 - Nowadays. &shy;All rigths reserved.
+        </p>
       </footer>
     </div>
 
@@ -113,8 +118,12 @@
 
   $majorFontSize: 1em;
 
-  .body-container {
+  .background-container {
+    z-index: -100;
+    position: fixed;
     height: 100%;
+    width: 100%;
+
     background: repeating-linear-gradient(
       35deg, White 0em, LightCyan 10em, Aquamarine 20em, MediumSlateBlue 30em, Violet 40em, Pink 50em, Cornsilk 60em, Ivory 70em, White 80em
     );
@@ -122,8 +131,9 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-position: center center;
-    @extend %break-long-words;
+    background-position: center;
+
+    pointer-events: none;
   }
 
   .window-container {
@@ -133,6 +143,8 @@
     font-family: Helvetica, Arial, sans-serif;
     font-size: $majorFontSize;
     color: MidnightBlue;
+
+    @extend %break-long-words;
   }
 
   .header-container {
@@ -222,6 +234,10 @@
       font-size: 0.8em;
       font-weight: bold;
     }
+    &>.p-item--copy {
+      padding-top: 1em;
+      font-size: 0.75em;
+    }
 
     &__svg {animation: svg-box-shadow 12s linear infinite;}
   }
@@ -232,6 +248,7 @@
 
     &--Yanka,
     &--Viola {
+      line-height: 1;
       text-shadow:
         0 0.1em 0.4em white,
         0 -0.1em 0.4em white,

@@ -4,7 +4,13 @@
     :download-status="downloadStatus"
     class="data-tab"
   />
-  <div v-else class="data-tab">
+  <div
+    v-else
+    :class="['data-tab',
+      {'data-tab--progress': controlValidationForm.get() ==='pending'
+      || controlValidationTable.get() ==='pending'}
+    ]"
+  >
 
     <section class="data-tab__section section">
       <h2 class="section__title title">Data form</h2>
@@ -106,6 +112,7 @@
 
       async addData(data) {
         controlValidationForm.set('pending')
+
 
         if (['network-error', 'fatal-error'].includes(controlValidationTable.get())) controlValidationTable.set('')
 
@@ -228,6 +235,8 @@
 </script>
 
 <style scoped lang="scss">
+  .data-tab--progress {cursor: progress;}
+
   /*------------------ Animations ------------------*/
   //--------- show-up
   .show-up {
