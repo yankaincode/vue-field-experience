@@ -14,14 +14,14 @@ The website is based on documentations [for Vue 3](https://vuejs.org/guide/intro
 * added preserving data within input fields in case it wasn't sent (because of Network error, for example),
 * PATCH and PUT request methods were used for edit,
 * new data from Form is not fully back-end friendly for now (error 500 exists within [the demo of the guide](https://taniarascia.github.io/vue-tutorial/) on PUT method as well), so as a workaround for editing new data a PATCH request method only was used for the case,
-* added &lt;component&gt; routing by listening hashchange event for tabs switching,
+* added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,
 * added animations by built-in components &lt;Transition&gt; and &lt;TransitionGroup&gt;,
 * added more style to UI design,
 * worked with SCSS, BEM, Git for practice.
 
 ### All used stack and tools:
 * HTML5, CSS3, JS (+ ESMA6);
-* Vue 3, Axios, SASS (SCSS);
+* Vue 3, Axios, SASS (SCSS), Autoprefixer;
 * BEM methodology, Git, Vue Devtools, npm manager;
 * mobile-first, adoptable to different screens, cross-browser.
 

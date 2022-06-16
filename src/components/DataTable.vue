@@ -374,10 +374,21 @@
 
   //--------- actions-activity
   .actions-activity {
-    &-enter-active {animation: toggle-on-x 0.4s;}
-    &-leave-active {animation: toggle-on-x 0.4s reverse;}
+    &-enter-active {
+      -webkit-animation: toggle-on-x 0.4s;
+      animation: toggle-on-x 0.4s;
+    }
+    &-leave-active {
+      -webkit-animation: toggle-on-x 0.4s reverse;
+      animation: toggle-on-x 0.4s reverse;
+    }
   }
 
+  @-webkit-keyframes toggle-on-x {
+    0% {transform: translateX(-1.1em);}
+    100% {transform: translateX(0);}
+  }
+  
   @keyframes toggle-on-x {
     0% {transform: translateX(-1.1em);}
     100% {transform: translateX(0);}

@@ -85,7 +85,7 @@
         return routes[this.currentTab || ''] || BrokenLinkTab
       }
     },
-    
+
     mounted() {
       // A workaround for just opened 'About' page to make the appropriate tab visually active and not saving the hash replacement in the history navigation
       if (window.location.hash === '') window.location.replace(`${window.location.origin}#about`)
@@ -120,7 +120,6 @@
 
 <style lang="scss">
   @import "./library.blocks/css-normalize/css-normalize.scss";
-  @import './modules/cross-browser-templates.scss';
   @import './modules/selection-vs-focus.scss';
   @import './modules/section.scss';
   @import './modules/link.scss';
@@ -154,7 +153,12 @@
     font-size: $majorFontSize;
     color: MidnightBlue;
 
-    @extend %break-long-words;
+    // break-long-words
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .header-container {
@@ -171,7 +175,6 @@
       margin-right: 0.3em;
       padding: 0.5em 0.7em 0.7em;
       font-size: $majorFontSize + 0.1em;
-      @extend %no-user-select;
 
       &:last-child {margin-right: unset;}
     }
@@ -249,7 +252,10 @@
       font-size: 0.75em;
     }
 
-    &__svg {animation: svg-box-shadow 12s linear infinite;}
+    &__svg {
+      -webkit-animation: svg-box-shadow 12s linear infinite;
+      animation: svg-box-shadow 12s linear infinite;
+    }
   }
 
   .link {
@@ -382,6 +388,16 @@
   }
 
   //--------- svg-box-shadow
+  @-webkit-keyframes svg-box-shadow {
+    0% {box-shadow: 0 0 0.3em 0.1em DodgerBlue;}
+    20% {box-shadow: 0 0 0.3em 0.1em SpringGreen;}
+    40% {box-shadow: 0 0 0.3em 0.1em Aquamarine;}
+    60% {box-shadow: 0 0 0.3em 0.1em Yellow;}
+    80% {box-shadow: 0 0 0.3em 0.1em Magenta;}
+    90% {box-shadow: 0 0 0.3em 0.1em MediumSlateBlue;}
+    100% {box-shadow: 0 0 0.3em 0.1em DodgerBlue;}
+  }
+
   @keyframes svg-box-shadow {
     0% {box-shadow: 0 0 0.3em 0.1em DodgerBlue;}
     20% {box-shadow: 0 0 0.3em 0.1em SpringGreen;}

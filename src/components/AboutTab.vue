@@ -17,7 +17,7 @@
           <li>added preserving data within input fields in case it wasn't sent (because of Network error, for example),</li>
           <li>PATCH and PUT request methods were used for edit,</li>
           <li>new data from Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround for editing new data a PATCH request method only was used for the case,</li>
-          <li>added &lt;component&gt; routing by listening hashchange event for tabs switching,</li>
+          <li>added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,</li>
           <li>added animations by built-in components &lt;Transition&gt; and &lt;TransitionGroup&gt;,</li>
           <li>added more style to UI design,</li>
           <li>worked with SCSS, BEM, Git for practice.</li>
@@ -32,6 +32,7 @@
           <li>Vue 3</li>
           <li>Axios</li>
           <li>SASS (SCSS)</li>
+          <li>Autoprefixer</li>
         </ul>
         <ul class="content__ul-list ul-list ul-list--string ul-list--pallet">
           <li>BEM methodology</li>
