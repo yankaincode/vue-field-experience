@@ -1,6 +1,6 @@
 <template>
-  <div class="broken-link">
-    <section class="broken-link__section section ">
+  <div class="broken-link-tab">
+    <section class="broken-link-tab__section section ">
       <h2 class="section__title title">Oh, it's 404 error!</h2>
       <div class="section__content content">
         <p class="content__p-item p-item">
@@ -14,13 +14,13 @@
 
 <script>
   export default {
-    name: 'broken-link',
+    name: 'broken-link-tab',
     title: 'Non-existent path have brought you here'
   }
 </script>
 
 <style scoped lang="scss">
-  .broken-link__section {
+  .broken-link-tab__section {
     & .title {background: linear-gradient(90deg, Pink, PowderBlue);}
     & .content {margin-top: 2em;}
     & .p-item {text-align: center;}

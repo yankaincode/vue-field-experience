@@ -12,7 +12,7 @@
            :href="tab.href"
            :class="['nav-bar__tab-link', 'tab-link', 'link',
            {'tab-link--active' : isTabActive(tab.href)}]"
-           :aria-label="assignTitleAndLabel(tab.href, tab.title)"
+           :aria-label="assignTabLabel(tab.href, tab.title)"
          >
            {{tab.title}}
          </a>
@@ -56,12 +56,12 @@
 <script>
   import AboutTab from '@/components/AboutTab.vue'
   import DataTab from '@/components/DataTab.vue'
-  import BrokenLink from '@/components/BrokenLink.vue'
+  import BrokenLinkTab from '@/components/BrokenLinkTab.vue'
 
   const routes = {
-    '/' : AboutTab,
-    '/about': AboutTab,
-    '/data-exchange': DataTab
+    '' : AboutTab,
+    '#about': AboutTab,
+    '#data-exchange': DataTab
   }
 
   export default {
@@ -69,40 +69,50 @@
     components: {
       AboutTab,
       DataTab,
-      BrokenLink
+      BrokenLinkTab
     },
     data() {
       return {
         currentTab: window.location.hash,
         tabs: [
-          {title: AboutTab.title, href: '#/about'},
-          {title: DataTab.title, href: '#/data-exchange'}
+          {title: AboutTab.title, href: '#about'},
+          {title: DataTab.title, href: '#data-exchange'}
         ]
       }
     },
     computed: {
       currentView() {
-        return routes[this.currentTab.slice(1) || '/'] || BrokenLink
+        return routes[this.currentTab || ''] || BrokenLinkTab
       }
     },
+    
     mounted() {
-      // A workaround for just opened 'About' page to make the appropriate tab active and update the title of the window
-      window.location.hash = '#/about'
+      // A workaround for just opened 'About' page to make the appropriate tab visually active and not saving the hash replacement in the history navigation
+      if (window.location.hash === '') window.location.replace(`${window.location.origin}#about`)
 
-      window.addEventListener('hashchange', () => {
-	  	  this.currentTab = window.location.hash
-	    })
+      this.updateDocTitle()
+      window.addEventListener('hashchange', this.onTabChange)
     },
+    updated() {
+      if (!document.activeElement.classList.contains('tab-link--active')) document.activeElement.blur()
+    },
+
     methods: {
-      assignTitleAndLabel(tabHref, tabTitle) {
-        const isTabActive = tabHref === this.currentTab
-        if (isTabActive) document.title = `${tabTitle}`
-
-        return (isTabActive) ? `The '${tabTitle}' page is opened` : `Open '${tabTitle}' page`
-      },
-
       isTabActive(tabHref) {
         return tabHref === this.currentTab
+      },
+
+      assignTabLabel(tabHref, tabTitle) {
+        return (this.isTabActive(tabHref)) ? `The '${tabTitle}' page is opened` : `Open '${tabTitle}' page`
+      },
+
+      onTabChange() {
+        this.currentTab = window.location.hash
+        this.updateDocTitle()
+      },
+
+      updateDocTitle() {
+        document.title = `${this.currentView.title} ✦ by Yanka_Incode`
       }
     }
   }
