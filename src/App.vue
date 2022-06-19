@@ -125,7 +125,7 @@
   @import './modules/link.scss';
   @import './modules/svg.scss';
 
-  $majorFontSize: 1em;
+  $majorFontSize: 1.1em;
 
   .background-container {
     z-index: -100;
@@ -174,7 +174,7 @@
       max-width: 150px;
       margin-right: 0.3em;
       padding: 0.5em 0.7em 0.7em;
-      font-size: $majorFontSize + 0.1em;
+      font-size: $majorFontSize + 0.05em;
 
       &:last-child {margin-right: unset;}
     }
@@ -242,15 +242,14 @@
     box-shadow: 0 0 0.4em 0.1em SlateBlue;
 
     &__p-item {
-      padding: 0.1em 0;
+      padding: 0.1em 0 0.6em;
       line-height: 1.4;
-      font-size: 0.8em;
+      font-size: $majorFontSize - 0.2em;
       font-weight: bold;
     }
-    &>.p-item--copy {
-      padding-top: 1em;
-      font-size: 0.75em;
-    }
+    &__p-item:last-child {padding-bottom: unset;}
+
+    &>.p-item--copy {font-size: $majorFontSize - 0.25em;}
 
     &__svg {
       -webkit-animation: svg-box-shadow 12s linear infinite;
@@ -333,8 +332,12 @@
       border-radius: 0 1.5em 1.5em 0;
       text-align: unset;
 
-      &__p-item {padding-bottom: 0.8em;}
-      &__p-item:last-child {padding-bottom: unset;}
+      &__p-item {
+        font-size: $majorFontSize - 0.25em;
+      }
+      &>.p-item--copy {
+        font-size: $majorFontSize - 0.3em;
+      }
     }
   }
 

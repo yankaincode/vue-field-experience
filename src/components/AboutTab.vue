@@ -16,7 +16,7 @@
           <li>added more thorough verification and separated error reporting to end-user for each input field of Form and Table (State Management with Reactivity API),</li>
           <li>added preserving data within input fields in case it wasn't sent (because of Network error, for example),</li>
           <li>PATCH and PUT request methods were used for edit,</li>
-          <li>new data from Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround for editing new data a PATCH request method only was used for the case,</li>
+          <li>new data appended through Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround a PATCH request method only was used for the case,</li>
           <li>added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,</li>
           <li>added animations by built-in components &lt;Transition&gt; and &lt;TransitionGroup&gt;,</li>
           <li>added more style to UI design,</li>
@@ -41,9 +41,9 @@
           <li>npm manager</li>
         </ul>
         <ul class="content__ul-list ul-list ul-list--string ul-list--ui">
-          <li>mobile-first</li>
-          <li>adoptable to different screens</li>
-          <li>cross-browser</li>
+          <li>Mobile-first approach</li>
+          <li>Adaptive design: from mobile to 8k</li>
+          <li>Cross-browser</li>
         </ul>
       </div>
     </section>
