@@ -1,12 +1,12 @@
 {
-  "name": "project-3",
+  "name": "vue-project",
   "version": "0.1.0",
   "description": "It's a front-end project made on Vue.js framework with Vue CLI. Data Form and Table exchange JSON data with JSON Placeholder API by Asynchronous API calls via Axios HTTP client, using Promises and Error handling. The Data resets only on reload and on closing of the current source. It doesn’t use cookies.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/whatever/testing.git"
+    "url": "https://github.com/yankaincode/vue-project"
   },
-  "main": "src/index.js",
+  "main": "./src/main.js",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,8 +15,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "browserify-zlib": "^0.2.0",
-    "core-js": "^3.23.1",
-    "core-js-pure": "^3.23.1",
+    "core-js": "^3.23.2",
+    "core-js-pure": "^3.23.2",
     "https-browserify": "^1.0.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
@@ -33,8 +33,8 @@
   },
   "author": {
     "name": "Yana Borozdina (Yanka_InCode)",
-    "email": "support@yankaincode.com",
-    "url": "yankaincode.com"
+    "email": "yankaincode@gmail.com",
+    "url": "https://github.com/yankaincode"
   },
   "license": "MIT"
 }

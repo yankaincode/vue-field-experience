@@ -26,7 +26,7 @@ The website is based on documentations [for Vue 3](https://vuejs.org/guide/intro
 * mobile-first approach, adaptive web design, cross-browser.
 
 ## Creators
-Coded by [Yanka_InCode](https://yankaincode.com/).
+Coded by [Yanka_InCode](https://github.com/yankaincode).
 
 Background image compilation and favicon are created by [ViolaIgua](https://viola-igua.tumblr.com/).
 

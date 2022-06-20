@@ -24,7 +24,7 @@
         </ul>
         <button @click="getData" class="rejected-container__button button">Retrieve data from the server again</button>
         <p class="rejected-container__p-item p-item">
-          If nothing has changed, please inform me of this incident by e-mail on <a class="link" href="mailto:support@yankaincode.com?subject=Error Report | Vue project by Yanka_Incode &body=Greets!%0A%0AI've tried to open Data tab, but it didn't download.%0AIt wasn't the Internet connection issue. Reload of the website and try to retrieve data from the server again by an appropriate button didn't help.">support@yankaincode.com</a>.
+          If nothing has changed, please inform me of this incident by e-mail on <a class="link" href="mailto:yankaincode@gmail.com?subject=Error Report | Vue project by Yanka_Incode &body=Greets!%0A%0AI've tried to open Data tab, but it didn't download.%0AIt wasn't the Internet connection issue. Reload of the website and try to retrieve data from the server again by an appropriate button didn't help.">yankaincode@gmail.com</a>.
         </p>
       </div>
 
