@@ -49,7 +49,6 @@
 
 <script>
   import axios from 'axios'
-  import Promise from 'core-js-pure/actual/promise';
 
   import DataDownloader from './DataDownloader.vue'
   import DataForm from './DataForm.vue'
