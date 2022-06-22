@@ -1,7 +1,7 @@
 {
-  "name": "vue-project",
+  "name": "vue-field-experience",
   "version": "0.1.0",
-  "description": "It's a front-end project made on Vue.js framework with Vue CLI. Data Form and Table exchange JSON data with JSON Placeholder API by Asynchronous API calls via Axios HTTP client, using Promises and Error handling. The Data resets only on reload and on closing of the current source. It doesn’t use cookies.",
+  "description": "It's a front-end project made on Vue.js framework with Vue CLI. Data Form and Table exchange JSON data with JSON Placeholder API by Asynchronous API calls via Axios HTTP client, using Promises and Error handling.",
   "repository": {
     "type": "git",
     "url": "https://github.com/yankaincode/vue-project"
@@ -32,7 +32,7 @@
     "sass-loader": "^13.0.0"
   },
   "author": {
-    "name": "Yana Borozdina (Yanka_InCode)",
+    "name": "Yanka_InCode",
     "email": "yankaincode@gmail.com",
     "url": "https://github.com/yankaincode"
   },

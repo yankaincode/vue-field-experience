@@ -7,15 +7,15 @@
       <header class="window-container__header-container header-container">
         <nav class="header-container__nav-bar nav-bar">
           <a
-           v-for="tab in tabs"
-           :key="tab"
-           :href="tab.href"
-           :class="['nav-bar__tab-link', 'tab-link', 'link',
-           {'tab-link--active' : isTabActive(tab.href)}]"
-           :aria-label="assignTabLabel(tab.href, tab.title)"
-         >
-           {{tab.title}}
-         </a>
+            v-for="tab in tabs"
+            :key="tab"
+            :href="tab.href"
+            :class="['nav-bar__tab-link', 'tab-link', 'link',
+            {'tab-link--active' : isTabActive(tab.href)}]"
+            :aria-label="assignTabLabel(tab.href, tab.title)"
+          >
+            {{tab.title}}
+          </a>
         </nav>
       </header>
 
@@ -42,8 +42,12 @@
             ></path>
           </a>
         </svg>
-        <p class="footer-container__p-item p-item">Coded by <a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a></p>
-        <p class="footer-container__p-item p-item">Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a></p>
+        <p class="footer-container__p-item p-item">
+          Coded and designed by <a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a>
+        </p>
+        <p class="footer-container__p-item p-item">
+          Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a>
+        </p>
         <p class="footer-container__p-item p-item p-item--copy">&copy;
           2022 - Nowadays. &shy;All rigths reserved.
         </p>
@@ -112,7 +116,7 @@
       },
 
       updateDocTitle() {
-        document.title = `${this.currentView.title} ✦ by Yanka_Incode`
+        document.title = `${this.currentView.title} ✦ by Yanka_InCode`
       }
     }
   }
@@ -152,13 +156,6 @@
     font-family: Helvetica, Arial, sans-serif;
     font-size: $majorFontSize;
     color: MidnightBlue;
-
-    // break-long-words
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
   .header-container {
@@ -229,6 +226,13 @@
   .page-content {
     min-height: 250px;
     padding: 0.7em 0.5em 0.8em;
+
+    // break-long-words
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .footer-container {
