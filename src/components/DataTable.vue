@@ -154,7 +154,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import './../modules/data-input.scss';
+  @forward './../modules/data-input.scss';
 
   %table-border-style {
     border-width: 0.1em 0.25em;
@@ -388,7 +388,7 @@
     0% {transform: translateX(-1.1em);}
     100% {transform: translateX(0);}
   }
-  
+
   @keyframes toggle-on-x {
     0% {transform: translateX(-1.1em);}
     100% {transform: translateX(0);}

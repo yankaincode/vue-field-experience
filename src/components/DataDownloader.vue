@@ -44,7 +44,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import './../modules/lists.scss';
+  @forward './../modules/lists.scss';
 
   .data-downloader {
     display: flex;

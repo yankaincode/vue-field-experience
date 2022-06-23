@@ -71,7 +71,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import './../modules/data-input.scss';
+  @forward './../modules/data-input.scss';
 
   .form {
     display: flex;

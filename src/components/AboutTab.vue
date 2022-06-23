@@ -59,7 +59,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import './../modules/lists.scss';
+  @forward './../modules/lists.scss';
 
   @mixin symbol($content) {
     & li:before {content: $content;}
