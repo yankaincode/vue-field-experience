@@ -2,21 +2,24 @@
   "name": "vue-field-experience",
   "version": "0.1.0",
   "description": "It's a front-end project made on Vue.js framework with Vue CLI. Data Form and Table exchange JSON data with JSON Placeholder API by Asynchronous API calls via Axios HTTP client, using Promises and Error handling.",
+  "homepage": "https://yankaincode.github.io/vue-field-experience",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yankaincode/vue-project"
+    "url": "https://github.com/yankaincode/vue-field-experience"
   },
   "main": "./src/main.js",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "npx vue-cli-service build --modern --mode production",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "browserify-zlib": "^0.2.0",
     "core-js": "^3.23.2",
     "core-js-pure": "^3.23.2",
+    "gh-pages": "^4.0.0",
     "https-browserify": "^1.0.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
