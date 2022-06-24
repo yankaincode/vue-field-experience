@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-library.blocks
+library_modules
 /dist
 
 

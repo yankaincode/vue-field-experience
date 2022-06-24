@@ -93,7 +93,7 @@
 </script>
 
 <style lang="scss">
-  @forward "./library.blocks/css-normalize/css-normalize.scss";
+  @forward "./../library_modules/css-normalize/css-normalize";
   @forward './modules/selection-vs-focus.scss';
   @forward './modules/section.scss';
   @forward './modules/link.scss';
