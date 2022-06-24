@@ -44,6 +44,7 @@
 </script>
 
 <style scoped lang="scss">
+  @forward './../modules/selection-vs-focus.scss';
   @use './../modules/global-vars.scss' as *;
 
   .header-container {

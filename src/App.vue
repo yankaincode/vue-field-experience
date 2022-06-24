@@ -70,7 +70,7 @@
 
     mounted() {
       // A workaround for just opened 'About' page to make the appropriate tab visually active and not saving the hash replacement in the history navigation
-      if (window.location.hash === '') window.location.replace(`${window.location.origin}#about`)
+      if (window.location.hash === '') window.location.replace(`${window.location.href}#about`)
 
       this.updateDocTitle()
       window.addEventListener('hashchange', this.onTabChange)
