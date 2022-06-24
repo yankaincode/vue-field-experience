@@ -92,7 +92,7 @@
     }
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1024px) {
     .header-container  {margin-right: unset;}
 
     .nav-bar {

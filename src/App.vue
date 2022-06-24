@@ -1,9 +1,8 @@
 <template>
-  <div class="app">
-    <div class="app__background-container background-container"></div>
+  <div class="app-container">
+    <div class="app-container__background-container background-container"></div>
 
-    <div class="app__window-container window-container">
-
+    <div class="app-container__window-container window-container">
       <HeaderContainer
         class="window-container__side-container side-container"
         :tabs="tabs"
@@ -107,16 +106,16 @@
     height: 100%;
     width: 100%;
 
-    background: repeating-linear-gradient(
-      35deg, White 0em, LightCyan 10em, Aquamarine 20em, MediumSlateBlue 30em, Violet 40em, Pink 50em, Cornsilk 60em, Ivory 70em, White 80em
-    );
-    background-image: url('./assets/ViolaIgua-background.png');
+    background-image: url('./assets/ViolaIgua-background--lower-quality.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
 
     pointer-events: none;
+
+    -webkit-animation: change-back 2s linear 0s 1;
+    animation: change-back 2s linear 0s 1;
   }
 
   .window-container {
@@ -159,7 +158,7 @@
     word-wrap: break-word;
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1024px) {
     .window-container {
       flex-direction: row;
       max-width: 1300px;
@@ -176,6 +175,9 @@
   }
 
   @media screen and (min-width: 2048px) {
+    .background-container {
+      background-image: url('./assets/ViolaIgua-background--original.png');
+    }
     .window-container {
       max-width: 2000px;
       font-size: $majorFontSize + 0.5em;
@@ -214,5 +216,16 @@
     &-leave-to {
       opacity: 0;
     }
+  }
+
+  //--------- change-back
+  @-webkit-keyframes change-back {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  @keyframes change-back {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 </style>

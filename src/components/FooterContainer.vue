@@ -73,7 +73,7 @@
     }
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1024px) {
     .footer-container {
       width: unset;
       margin: auto 1em 1.5em 0;
