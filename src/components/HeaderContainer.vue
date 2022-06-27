@@ -58,7 +58,7 @@
     &__tab-link {
       min-width: 100px;
       max-width: 150px;
-      margin-right: 0.3em;
+      margin-right: 0.4em;
       padding: 0.5em 0.7em 0.7em;
       font-size: $majorFontSize + 0.05em;
 
@@ -77,18 +77,39 @@
     box-shadow: 0 0 0.3em 0.1em SlateBlue;
     transition: all 0.2s linear;
 
-    &:hover {
-      background: linear-gradient(130deg, LightSeaGreen, Aquamarine, White, Wheat, RosyBrown);
-      top: 0;
-    }
-
     &--active {
       background: linear-gradient(90deg, Wheat, White);
       box-shadow: 0 0 0.3em 0.1em SaddleBrown;
+    }
+  }
 
+  @media (pointer: fine) {
+    .tab-link {
       &:hover {
+        background: linear-gradient(130deg, LightSeaGreen, Aquamarine, White, Wheat, RosyBrown);
+        top: 0;
+      }
+
+      &--active:hover {
         background: linear-gradient(130deg, Wheat, White, FloralWhite, Wheat, RosyBrown);
         top: 0.4em;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) and (pointer: fine) {
+    .tab-link {
+      top: 0;
+      left: 0.5em;
+      padding-right: 1em;
+      border-radius: 0.5em 0 0 0.5em;
+      text-align: left;
+
+      &:hover {left: 0;}
+
+      &--active:hover {
+        top: 0;
+        left: 0.5em;
       }
     }
   }
@@ -107,7 +128,7 @@
         max-width: unset;
         width: 100%;
         margin-right: unset;
-        margin-bottom: 0.3em;
+        margin-bottom: 0.4em;
         padding: 0.5em 0.5em 0.3em;
 
         &:first-child {margin-top: 1em;}
@@ -121,13 +142,6 @@
       padding-right: 1em;
       border-radius: 0.5em 0 0 0.5em;
       text-align: left;
-
-      &:hover {left: 0;}
-
-      &--active:hover {
-        top: 0;
-        left: 0.5em;
-      }
     }
   }
 </style>

@@ -1,0 +1,33 @@
+.ul-list {
+  &--string {
+    list-style-type: none;
+
+    & li:before {padding-right: 0.5em;}
+  }
+
+  &--roll {margin-left: 1.5em;}
+  &--square {list-style-type: square;}
+}
+
+@media screen and (min-width: 400px) {
+  .ul-list {
+    &--string {
+      text-align: center;
+
+      & li {
+        display: inline-block;
+
+        &:before {
+          padding-right: 0.3em;
+          padding-left: 1.3em;
+        }
+      }
+    }
+
+    &--roll {margin-left: 2.5em;}
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .ul-list--roll {margin-left: 4em;}
+}

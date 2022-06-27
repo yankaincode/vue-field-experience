@@ -11,23 +11,38 @@ a,
 select,
 textarea,
 button,
-input,
-summary {
+input {
   &:focus {
-    box-shadow: 0 0 0.2em 0.2em Violet;
+    box-shadow: 0 0 0.2em 0.2em Violet !important;
   }
 }
 
-a,
+@media (pointer: fine) {
+  select,
+  textarea,
+  button,
+  input[type="submit"] {
+    &:hover {color: MediumBlue;}
+  }
+
+  button,
+  input,
+  input[type="submit"] {
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
 select,
 textarea,
 button,
-input[type="submit"],
-summary {
+input[type="submit"] {
   &:focus {
-    color: Blue;
     text-decoration: underline;
+    color: Blue;
   }
+  &:active {color: RoyalBlue;}
 }
 
 button,
@@ -36,6 +51,10 @@ input[type="submit"] {
   &:disabled {
     color: DarkSlateGrey;
     opacity: 0.8;
-    cursor: not-allowed;
   }
+}
+
+input[type="submit"],
+button {
+  &:focus {outline: unset;}
 }

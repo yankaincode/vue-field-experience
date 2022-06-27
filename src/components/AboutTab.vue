@@ -3,11 +3,10 @@
 
     <section class="about-tab__section section">
       <h2 class="section__title title">Project description</h2>
-      <div class="section__content content">
+      <div class="section__content content content--article">
         <p class="content__p-item p-item">
           It's a front-end project made on Vue.js framework with Vue CLI.
           <br />Data Form and Table exchange JSON data with <a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener" class="link">JSON Placeholder API</a> by Asynchronous API calls via Axios HTTP client, using Promises and Error handling.
-          <br />The Data resets only on reload and on closing of the current source. It doesn’t use cookies.
         </p>
         <p class="content__p-item p-item">
           The website is based on documentations <a href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener" class="link">for Vue 3</a> and <a href="https://axios-http.com/docs/intro" target="_blank" rel="noopener" class="link">for Axios</a> and inspired by introduction guide <a href="https://www.taniarascia.com/getting-started-with-vue/" target="_blank" rel="noopener" class="link">'Vue Tutorial: An Overview and Walkthrough'</a> by Tania Rascia, but went further than guide:
@@ -19,7 +18,7 @@
           <li>new data appended through Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround a PATCH request method only was used for the case,</li>
           <li>added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,</li>
           <li>added animations by built-in components &lt;Transition&gt; and &lt;TransitionGroup&gt;,</li>
-          <li>added more style to UI design,</li>
+          <li>added more style to UI design with attention to UX,</li>
           <li>worked with SCSS, BEM, Git for practice.</li>
         </ul>
         <p class="content__p-item p-item">All used stack and tools:</p>
@@ -59,7 +58,7 @@
 </script>
 
 <style scoped lang="scss">
-  @forward './../modules/lists.scss';
+  @forward './../modules/list.scss';
 
   @mixin symbol($content) {
     & li:before {content: $content;}

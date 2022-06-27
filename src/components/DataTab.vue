@@ -11,10 +11,15 @@
       || controlValidationTable.get() ==='pending'}
     ]"
   >
+  <section class="data-tab__section section">
+    <Transition name="show-up-details" type="transition" appear="appear">
+      <DataDetails class="section__content content" />
+    </Transition>
+  </section>
 
     <section class="data-tab__section section">
       <h2 class="section__title title">Data form</h2>
-      <Transition name="show-up" type="transition" appear>
+      <Transition name="show-up-form" type="transition" appear="appear">
         <KeepAlive>
           <DataForm
             @add:data="addData"
@@ -51,6 +56,7 @@
   import axios from 'axios'
 
   import DataDownloader from './DataDownloader.vue'
+  import DataDetails from './DataDetails.vue'
   import DataForm from './DataForm.vue'
   import DataStatus from './DataStatus.vue'
   import DataTable from './DataTable.vue'
@@ -64,6 +70,7 @@
     title: 'Project: Data Exchange',
     components: {
       DataDownloader,
+      DataDetails,
       DataForm,
       DataStatus,
       DataTable
@@ -111,7 +118,6 @@
 
       async addData(data) {
         controlValidationForm.set('pending')
-
 
         if (['network-error', 'fatal-error'].includes(controlValidationTable.get())) controlValidationTable.set('')
 
@@ -237,20 +243,29 @@
   .data-tab--progress {cursor: progress;}
 
   /*------------------ Animations ------------------*/
-  //--------- show-up
-  .show-up {
-    &-enter-active {transition: all 0.3s ease-out;}
-    &-leave-active {transition: all 0.2s ease-in-out;}
+  //--------- show-up-details
+  .show-up-details {
+    &-enter-active,
+    &-leave-active {
+      transition: all 0.5s linear;
+    }
 
     &-enter-from,
     &-leave-to {
+      transform: translateX(-2em);
+      opacity: 0;
+    }
+  }
+
+  //--------- show-up-form
+  .show-up-form {
+    &-enter-active {transition: all 0.5s ease-out;}
+
+    &-enter-from {
       font-size: 0em;
       transform: translateY(-2em);
       opacity: 0.1;
     }
-    &-enter-to,
-    &-leave-from {
-      opacity: 0.8;
-    }
+    &-enter-to {opacity: 0.8;}
   }
 </style>

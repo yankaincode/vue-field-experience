@@ -44,7 +44,11 @@
 </script>
 
 <style scoped lang="scss">
-  @forward './../modules/lists.scss';
+  @forward './../modules/list.scss';
+
+  @media (pointer: fine) {
+    .data-downloader .button:hover {background-color: Azure;}
+  }
 
   .data-downloader {
     display: flex;
@@ -74,7 +78,6 @@
       background-color: LightCyan;
       transition: all 0.05s linear;
 
-      &:hover {background-color: Azure;}
       &:active {background-color: PaleTurquoise;}
     }
   }

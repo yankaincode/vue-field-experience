@@ -2,7 +2,7 @@
   <table class="data-table">
 
     <Transition name="table-header" type="transition" mode="in-out">
-      <caption v-if="dataCollection.length < 1" class="data-table__caption caption caption--only-message">
+      <caption v-if="dataCollection.length < 1" class="data-table__caption caption caption--bold-message">
         No data here. Add some new!
       </caption>
       <thead v-else class="data-table__thead thead">
@@ -156,6 +156,8 @@
 <style scoped lang="scss">
   @forward './../modules/data-input.scss';
 
+  @use './../modules/global-vars.scss' as *;
+
   %table-border-style {
     border-width: 0.1em 0.25em;
     border-style: inset;
@@ -171,29 +173,25 @@
     &__thead {background: linear-gradient(0, White, PeachPuff);}
 
     &__caption {
-      padding: 0.6em 0.6em 0.3em;
+      min-height: 2.5em;
+      padding: 0.6em;
       border-color: BlueViolet;
       background: linear-gradient(181deg, LightCyan, Cornsilk, Wheat);
       @extend %table-border-style;
     }
   }
 
-  .caption--only-message {font-weight: bold;}
+  .caption--bold-message {font-weight: bold;}
 
   .cell {
     display: block;
-    margin: auto;
     padding-right: 0.65em;
     padding-left: 0.65em;
   }
 
   .thead {
     &__row {border-bottom: 0.1em ridge SteelBlue;}
-
-    &__cell {
-      margin: auto;
-      padding-top: 0.5em;
-    }
+    &__cell {line-height: 2.3em;}
   }
 
   .tbody {
@@ -210,23 +208,25 @@
     }
 
     &__cell {
-      min-height: 40px;
-      padding-top: 4px;
-      padding-bottom: 4px;
-      line-height: 2;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
     }
 
     &__input {
       width: 100%;
-      padding: 0.25em 0.35em 0.1em;
+      padding: 0.1em 0.35em;
       border-width: 0.2em;
       border-style: inset;
     }
   }
 
   .row--editing {
-    padding: 0.3em 0.2em;
     background-color: SlateBlue !important;
+
+    & .cell {
+      padding-left: 0.1em;
+      &:last-child {padding-left: initial;}
+    }
   }
 
   .actions-container {
@@ -235,7 +235,12 @@
     align-items: center;
     gap: 0.5em;
 
-    &__action-button {padding: 0.35em 0.3em 0.1em;}
+    &__action-button {
+      height: 1.5em;
+      line-height: 1.5em;
+      padding-right: 0.4em;
+      padding-left: 0.4em;
+    }
   }
 
   .action-button {
@@ -252,14 +257,15 @@
   }
 
   .status-window {
-    margin-bottom: 0.35em;
-    padding: 0.5em 0.95em 0.15em;
+    margin-bottom: 0.4em;
+    padding: 0.5em 0.95em 0.2em;
     border: 0.15em groove SlateBlue;
     border-radius: 0.95em;
     line-height: 1;
+    font-size: $majorFontSize - 0.15em;
     background: White;
 
-    &:before {margin-bottom: 5px;}
+    &:before {margin-bottom: 0.35em;}
   }
 
   @media screen and (min-width: 500px) {
@@ -278,6 +284,14 @@
         text-align: right;
       }
     }
+
+    .tbody{
+      &__input {
+        width: 100%;
+        padding-right: 0.65em;
+      }
+    }
+
     .actions-container {
       padding-right: 5%;
       justify-content: flex-end;
@@ -294,8 +308,8 @@
 
     .thead {
       &__cell {
-        padding-top: 10px;
-        padding-bottom: 5px;
+        padding-top: 0.65em;
+        padding-bottom: 0.3em;
 
         &:last-child {padding-right: 4%;}
       }
@@ -319,9 +333,7 @@
       text-align: left;
     }
 
-    .cell:last-child {
-      display: none;
-    }
+    .cell:last-child {display: none;}
   }
 
   /*------------------ Animations ------------------*/

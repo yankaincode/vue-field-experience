@@ -1,9 +1,14 @@
+@media (pointer: fine) {
+  .link:hover {color: RoyalBlue;}
+}
+
 .link {
   font-weight: bold;
   text-decoration: none;
   color: MediumBlue;
 
-  &:hover {color: RoyalBlue;}
-  &:active {color: Blue;}
-  &:focus {border-radius: 0.2em;}
+  &:focus {
+    border-radius: 0.2em;
+    color: Blue;
+  }
 }

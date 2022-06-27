@@ -7,7 +7,6 @@
     border-color: RoyalBlue;
     background-color: White !important;
   }
-  &:hover {background-color: LavenderBlush;}
 
   &:disabled {
     border-color: SlateBlue !important;
@@ -21,7 +20,13 @@
   &--rejected {
     border-color: Crimson;
     background-color: Pink;
+  }
+}
 
-    &:hover {background-color: MistyRose;}
+@media (pointer: fine) {
+  .input {
+    &:hover {background-color: LavenderBlush;}
+
+    &--rejected:hover {background-color: MistyRose;}
   }
 }

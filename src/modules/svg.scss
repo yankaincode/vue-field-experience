@@ -1,3 +1,7 @@
+@media (pointer: fine) {
+  .svg__svg-link:hover {fill: RoyalBlue;}
+}
+
 .svg {
   width: 2.2em;
   height: 2.2em;
@@ -11,10 +15,7 @@
   -ms-user-select: none;
   user-select: none;
 
-  &__svg-link {
-    &:hover {fill: RoyalBlue;}
-    &:focus {fill: Violet;}
-  }
+  &__svg-link:focus {fill: Violet;}
 }
 
 .svg-link {

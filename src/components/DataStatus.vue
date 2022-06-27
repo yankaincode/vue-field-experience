@@ -27,11 +27,13 @@
         type: String,
         required: true
       },
-      dataQuantity: { // Necessary if status should be on display in every case.
+      dataQuantity: {
+        // Necessary if status should be on display in every case.
         type: Number,
         default: -1
       },
-      editMode:  { // Necessary if editMode status should be catched
+      editMode: {
+        // Necessary if editMode status should be catched
         type: Boolean,
         default: false
       }
@@ -121,11 +123,11 @@
     }
 
     &--with-data {
-      color: MediumBlue;
+      color: RoyalBlue;
       @include symbol("\2728");
     }
     &--no-data {
-      color: Blue;
+      color: Teal;
       @include symbol("\01F4AB");
     }
     &--edit-mode {

@@ -6,25 +6,24 @@
     background: linear-gradient(90deg, Wheat, PaleTurquoise);
   }
 
-  &__content {
-    margin: 1em 1em 0 0.9em;
-    text-align: justify;
-  }
+  &__content {text-align: justify;}
 }
 .content {
+  &--article {margin: 1em 1em 0 0.9em;}
+
   &__p-item {padding-top: 0.9em;}
   &__p-item:first-child {padding-top: unset;}
 }
 
 @media screen and (min-width: 500px) {
-  .section__content {
+  .content--article {
     margin-right: 2.2em;
     margin-left: 1.8em;
   }
 }
 
 @media screen and (min-width: 700px) {
-  .section__content {
+  .content--article {
     margin-right: 1.85em;
     margin-left: 1.25em;
   }

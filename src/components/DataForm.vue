@@ -98,6 +98,15 @@
     }
   }
 
+  @media (pointer: fine) {
+    .submit-button:hover {
+      background: linear-gradient(
+        90deg,
+        Pink, Azure, Aquamarine
+      );
+    }
+  }
+
   .submit-button {
     border: 0.2em outset SlateBlue;
     border-radius: 0.6em;
@@ -106,12 +115,6 @@
       Khaki, MintCream, PaleGreen
     );
 
-    &:hover {
-      background: linear-gradient(
-        90deg,
-        Pink, Azure, Aquamarine
-      );
-    }
     &:active {
       border-style: inset;
       background: linear-gradient(

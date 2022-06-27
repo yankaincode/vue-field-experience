@@ -11,13 +11,13 @@
     </svg>
 
     <p class="footer-container__p-item p-item">
-      Coded and designed by <a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a>
+      Coded and designed by&nbsp;<a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a>.
     </p>
     <p class="footer-container__p-item p-item">
-      Background image compilation and favicon are created by <a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a>
+      Background image compilation and favicon are created by&nbsp;<a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a>.
     </p>
-    <p class="footer-container__p-item p-item p-item--copy">&copy;
-      2022 - Nowadays. &shy;All rigths reserved.
+    <p class="footer-container__p-item p-item p-item--copy">
+      &copy;&nbsp;2022&nbsp;-&nbsp;Nowadays. All&nbsp;rigths&nbsp;reserved.
     </p>
 
   </footer>
