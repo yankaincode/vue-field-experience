@@ -23,7 +23,7 @@
   }
 }
 
-@media (pointer: fine) {
+@media screen and (pointer: fine) {
   .input {
     &:hover {background-color: LavenderBlush;}
 

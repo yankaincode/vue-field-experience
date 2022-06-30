@@ -46,8 +46,11 @@
 <style scoped lang="scss">
   @forward './../modules/list.scss';
 
-  @media (pointer: fine) {
-    .data-downloader .button:hover {background-color: Azure;}
+  @media screen and (pointer: fine) {
+    .data-downloader {
+      & .button:hover {background-color: Azure;}
+      &--pending {cursor: wait;}
+    }
   }
 
   .data-downloader {
@@ -60,10 +63,7 @@
     font-weight: bold;
     text-align: center;
 
-    &--pending {
-      background: linear-gradient(180deg, Honeydew, Khaki);
-      cursor: wait;
-    }
+    &--pending {background: linear-gradient(180deg, Honeydew, Khaki);}
     &--rejected {background: linear-gradient(180deg, Lavender, MistyRose);}
 
     & .p-item {

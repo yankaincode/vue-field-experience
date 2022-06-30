@@ -11,13 +11,13 @@
       || controlValidationTable.get() ==='pending'}
     ]"
   >
-  <section class="data-tab__section section">
+  <section class="data-tab__section section section--middle">
     <Transition name="show-up-details" type="transition" appear="appear">
       <DataDetails class="section__content content" />
     </Transition>
   </section>
 
-    <section class="data-tab__section section">
+    <section class="data-tab__section section section--middle">
       <h2 class="section__title title">Data form</h2>
       <Transition name="show-up-form" type="transition" appear="appear">
         <KeepAlive>
@@ -240,18 +240,16 @@
 </script>
 
 <style scoped lang="scss">
-  .data-tab--progress {cursor: progress;}
+  @media screen and (pointer: fine) {
+    .data-tab--progress {cursor: progress;}
+  }
 
   /*------------------ Animations ------------------*/
   //--------- show-up-details
   .show-up-details {
-    &-enter-active,
-    &-leave-active {
-      transition: all 0.5s linear;
-    }
+    &-enter-active {transition: all 1s linear 0.5s;}
 
-    &-enter-from,
-    &-leave-to {
+    &-enter-from {
       transform: translateX(-2em);
       opacity: 0;
     }
@@ -259,7 +257,7 @@
 
   //--------- show-up-form
   .show-up-form {
-    &-enter-active {transition: all 0.5s ease-out;}
+    &-enter-active {transition: all 1.2s ease-out 0.3s;}
 
     &-enter-from {
       font-size: 0em;

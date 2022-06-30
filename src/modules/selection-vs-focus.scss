@@ -17,7 +17,7 @@ input {
   }
 }
 
-@media (pointer: fine) {
+@media screen and (pointer: fine) {
   select,
   textarea,
   button,
@@ -28,9 +28,7 @@ input {
   button,
   input,
   input[type="submit"] {
-    &:disabled {
-      cursor: not-allowed;
-    }
+    &:disabled {cursor: not-allowed;}
   }
 }
 

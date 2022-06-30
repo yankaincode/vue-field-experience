@@ -1,20 +1,26 @@
 <template>
   <footer class="footer-container">
 
-    <svg class="footer-container__svg svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-      <a xlink:href="https://github.com/yankaincode/vue-field-experience" target="_blank" rel="noopener" class="svg__svg-link svg-link" aria-label="View the code source of the project on GitHub">
-        <rect class="svg-link__rect"></rect>
-        <path
-          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-        ></path>
-      </a>
-    </svg>
+    <div class="footer-container__svg-links-container svg-links-container">
+      <svg class="svg-links-container__svg svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <a xlink:href="https://github.com/yankaincode/vue-field-experience" target="_blank" rel="noopener" class="svg__svg-link svg-link" aria-label="View a source code of the project on GitHub">
+          <rect height="100%" width="100%" fill="#ffffff">
+            <title>A source code of the project on GitHub</title>
+          </rect>
+          <path
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+          >
+            <title>A source code of the project on GitHub</title>
+          </path>
+        </a>
+      </svg>
+    </div>
 
     <p class="footer-container__p-item p-item">
-      Coded and designed by&nbsp;<a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a>.
+      Coded and designed by&nbsp;<a href="https://github.com/yankaincode" aria-label="Yanka_InCode on GitHub" title="Yanka_InCode on GitHub" target="_blank" rel="noopener" class="link link--Yanka">Yanka_InCode</a>.
     </p>
     <p class="footer-container__p-item p-item">
-      Background image compilation and favicon are created by&nbsp;<a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a>.
+      Background image compilation and favicon are created by&nbsp;<a href="https://viola-igua.tumblr.com/" aria-label="ViolaIgua on Tumblr" title="ViolaIgua on Tumblr" target="_blank" rel="noopener" class="link link--Viola">ViolaIgua</a>.
     </p>
     <p class="footer-container__p-item p-item p-item--copy">
       &copy;&nbsp;2022&nbsp;-&nbsp;Nowadays. All&nbsp;rigths&nbsp;reserved.
@@ -30,7 +36,6 @@
 </script>
 
 <style scoped lang="scss">
-  @forward './../modules/svg.scss';
   @use './../modules/global-vars.scss' as *;
 
   .footer-container {
@@ -46,16 +51,33 @@
     &__p-item {
       padding: 0.1em 0 0.6em;
       line-height: 1.4;
-      font-size: $majorFontSize - 0.2em;
+      font-size: $majorFontSize - 0.1em;
       font-weight: bold;
     }
     &__p-item:last-child {padding-bottom: unset;}
-    &>.p-item--copy {font-size: $majorFontSize - 0.25em;}
+    & .p-item--copy {font-size: $majorFontSize - 0.15em;}
+  }
 
-    &__svg {
+  .svg-links-container {
+    & .svg {
+      height: 2.2em;
+      width: 2.2em;
+      padding: 0.1em;
+      border-radius: 50%;
+      fill: MidnightBlue;
+
       -webkit-animation: svg-box-shadow 12s linear infinite;
       animation: svg-box-shadow 12s linear infinite;
     }
+
+    & .svg-link {
+      &:focus {fill: Blue;}
+      &:active {fill: Violet;}
+    }
+  }
+
+  @media screen and (pointer: fine) {
+    .svg-links-container .svg-link:hover {fill: RoyalBlue;}
   }
 
   .link {
@@ -79,9 +101,6 @@
       margin: auto 1em 1.5em 0;
       border-radius: 0 1.5em 1.5em 0;
       text-align: unset;
-
-      &__p-item {font-size: $majorFontSize - 0.25em;}
-      &>.p-item--copy {font-size: $majorFontSize - 0.3em;}
     }
   }
 

@@ -5,8 +5,9 @@
     >
       {{ assignStatusMessage() }}
     </p>
-    <ol v-else :class="['data-status__errors-ol', 'errors-ol',
-    (dataQuantity > -1) ? 'errors-ol--roman' : 'errors-ol--no-marker']">
+    <ol v-else :class="['data-status__errors-ol', 'errors-ol', 'ol-list',
+      (errorsArr.length > 1) ? 'ol-list--roman' : 'ol-list--no-marker']"
+    >
       <li v-for="error in errorsArr">
         <strong>{{ messageTypesObj[error] }}</strong>
       </li>
@@ -80,7 +81,7 @@
 
       assignClass(validationStatus) {
         return (this.editMode) ? 'edit-mode'
-          : (this.dataQuantity === 0 && ['', 'with-data', 'fulfilled'].includes(validationStatus)) ? 'no-data'
+          : (this.dataQuantity === 0 && ['', 'with-data'].includes(validationStatus)) ? 'no-data'
           : (this.dataQuantity > 0 && (validationStatus === '' || validationStatus === 'no-data')) ? 'with-data'
           : validationStatus
       }
@@ -89,16 +90,21 @@
 </script>
 
 <style scoped lang="scss">
+  @forward './../modules/list.scss';
+
   @mixin symbol($char) {
-    &:before {
-      content: $char;
-      display: block;
-    }
+    &:before {content: $char;}
   }
 
   .data-status {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     font-weight: bold;
+
+    & .p-item {text-align: center;}
 
     &--pending {
       color: MediumBlue;
@@ -136,18 +142,11 @@
     }
 
     &--none {display: none}
-  }
 
-  .errors-ol {
-    &--roman {
-      list-style-type: upper-roman;
+    & .errors-ol {
+      list-style-position:inside;
 
-      & li::marker {
-        font-family: Garamond;
-        color: DarkMagenta;
-      }
+      & li::marker {color: DarkMagenta;}
     }
-
-    &--no-marker {list-style-type: none;}
   }
 </style>

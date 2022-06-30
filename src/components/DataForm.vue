@@ -80,7 +80,7 @@
     flex-wrap: wrap;
 
     &__input {
-      width: 100%;
+      width: 95%;
       margin-bottom: 1.1em;
       padding: 0.4em 0.65em;
       border-width: 0.4em;
@@ -98,7 +98,7 @@
     }
   }
 
-  @media (pointer: fine) {
+  @media screen and (pointer: fine) {
     .submit-button:hover {
       background: linear-gradient(
         90deg,

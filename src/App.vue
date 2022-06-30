@@ -138,24 +138,31 @@
       0.1em -0.1em 0.3em SlateBlue;
   }
 
-  .page-title {
-    margin: 0;
-    padding: 0.5em 0.6em 0.1em;
-    border-radius: 0.45em 0.45em 0 0;
-    text-align: center;
-    color: white;
-    background-color: Teal;
-  }
-  .page-content {
-    min-height: 250px;
-    padding: 0.7em 0.5em 0.8em;
+  .page {
+    &-title {
+      margin: 0;
+      padding: 0.5em 0.6em 0.1em;
+      border-radius: 0.45em 0.45em 0 0;
+      text-align: center;
+      color: white;
+      background-color: Teal;
+    }
 
-    // break-long-words
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    &-content {
+      min-height: 250px;
+      padding: 0.7em 0.5em 0.8em;
+
+      // break-long-words
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .window-container {font-size: $majorFontSize + 0.15em;}
   }
 
   @media screen and (min-width: 1024px) {
@@ -163,6 +170,7 @@
       flex-direction: row;
       max-width: 1300px;
       margin: 0 auto;
+      font-size: $majorFontSize + 0.1em;
     }
     .main-container {flex: 5 1 800px;}
     .side-container {flex: 0 1 150px;}
@@ -178,9 +186,10 @@
     .background-container {
       background-image: url('./assets/ViolaIgua-background--original.png');
     }
+
     .window-container {
       max-width: 2000px;
-      font-size: $majorFontSize + 0.5em;
+      font-size: $majorFontSize + 0.6em;
     }
     .side-container {flex-basis: 250px;}
     .page-content {min-height: 400px;}
@@ -189,7 +198,7 @@
   @media screen and (min-width: 3840px) {
     .window-container {
       max-width: 3300px;
-      font-size: $majorFontSize + 1.5em;
+      font-size: $majorFontSize + 1.6em;
     }
     .side-container {flex-basis: 400px;}
     .page-content {min-height: 600px;}
@@ -198,7 +207,7 @@
   @media screen and (min-width: 5120px) {
     .window-container {
       max-width: 4200px;
-      font-size: $majorFontSize + 2.2em;
+      font-size: $majorFontSize + 2.4em;
     }
     .side-container {flex-basis: 550px;}
     .page-content {min-height: 750px;}

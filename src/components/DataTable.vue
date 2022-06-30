@@ -208,8 +208,10 @@
     }
 
     &__cell {
-      padding-top: 0.3em;
-      padding-bottom: 0.3em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+
+      &:last-child {padding-bottom: 0.5em;}
     }
 
     &__input {
@@ -220,14 +222,7 @@
     }
   }
 
-  .row--editing {
-    background-color: SlateBlue !important;
-
-    & .cell {
-      padding-left: 0.1em;
-      &:last-child {padding-left: initial;}
-    }
-  }
+  .row--editing {background-color: SlateBlue !important;}
 
   .actions-container {
     display: flex;
@@ -257,12 +252,12 @@
   }
 
   .status-window {
-    margin-bottom: 0.4em;
+    margin-bottom: 0.65em;
     padding: 0.5em 0.95em 0.2em;
     border: 0.15em groove SlateBlue;
     border-radius: 0.95em;
     line-height: 1;
-    font-size: $majorFontSize - 0.15em;
+    font-size: $majorFontSize - 0.1em;
     background: White;
 
     &:before {margin-bottom: 0.35em;}
@@ -270,9 +265,7 @@
 
   @media screen and (min-width: 500px) {
     .cell {
-      &:last-child {
-        display: table-cell;
-      }
+      &:last-child {display: table-cell;}
     }
 
     .thead__cell {
@@ -297,7 +290,22 @@
       justify-content: flex-end;
     }
 
-    .status-window {border-bottom-right-radius: 0;}
+    .status-window {
+      margin-bottom: 0.4em;
+      border-bottom-right-radius: 0;
+    }
+
+    .row--editing {
+      & .cell {
+        padding-right: 0.2em;
+        padding-left: 0.2em;
+
+        &:last-child  {
+          padding-right: 0.65em;
+          padding-left: 0.65em;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 700px) {
