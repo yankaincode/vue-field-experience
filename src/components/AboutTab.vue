@@ -30,8 +30,8 @@
 
         <div class="content__tools-container tools-container">
           <ul class="tools-container__ul-list ul-list ul-list--string ul-list--basis">
-            <li>HTML5</li>
-            <li>CSS3</li>
+            <li>HTML5 (+ accessibility, SVG)</li>
+            <li>CSS3 (+ flex, animation)</li>
             <li>JS (+ ESMA6)</li>
           </ul>
           <ul class="tools-container__ul-list ul-list ul-list--string ul-list--addon">

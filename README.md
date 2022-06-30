@@ -22,7 +22,7 @@ The website is based on documentations [for Vue 3](https://vuejs.org/guide/intro
 * worked with Axios, SCSS, BEM, Git for practice.
 
 ### All used stack and tools:
-* HTML5, CSS3, JS (+ ESMA6);
+* HTML5 (+ accessibility, SVG), CSS3 (+ flex, animation), JS (+ ESMA6);
 * Vue 3, Axios, SASS (SCSS), Autoprefixer;
 * BEM methodology, Git, Vue Devtools, Vue CLI, Babel, npm manager;
 * mobile-first approach, adaptive web design, cross-browser.
@@ -33,6 +33,6 @@ Coded by [Yanka_InCode](https://github.com/yankaincode).
 Background image compilation and favicon are created by [ViolaIgua](https://viola-igua.tumblr.com/).
 
 ## License
-The code source of the project is distributed under [MIT License](./LICENSE).
+The source code of the project is distributed under [MIT License](./LICENSE).
 
 All images used in this project are not a part of the MIT License agreement. All rights reserved and belongs to their owners.
