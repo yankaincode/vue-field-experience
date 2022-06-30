@@ -11,7 +11,7 @@ The website is based on documentations [for Vue 3](https://vuejs.org/guide/intro
 ### Improvements and developments:
 * separated error reporting about each input field of Form and Table (State Management with Reactivity API),
 * implemented thorough validation with RegExp and blocking of inappropriate key input (it works within PC),
-* added preserving data within input fields in case it won't be sent (because of Network error, for example),
+* added error reporting, if default data wasn't received from the server, and preserving data within input fields in case it wasn't sent successfully (because of Network error, for example),
 * PATCH and PUT request methods were applied for edit, taking into account data with no change won't be sent to the server,
 * new data appended through Form is not fully back-end friendly for now (error 500 exists within [the demo of the guide](https://taniarascia.github.io/vue-tutorial/) on PUT method as well), so as a workaround a PATCH request method only was used for the case,
 * added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,

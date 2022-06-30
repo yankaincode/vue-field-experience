@@ -22,7 +22,7 @@
       class="data-table__tbody tbody"
     >
       <tr
-        v-for="data in dataCollection"
+        v-for="data in dataCollection.slice().reverse()"
         :key="data.id"
         :class="['tbody__row', 'row', {'row--editing': controlModeEdit.id === data.id}]"
       >
@@ -245,6 +245,7 @@
   .action-button {
     border: 0.1em ridge RosyBrown;
     border-radius: 0.5em;
+    font-size: $majorFontSize + 0.1em;
 
     &:hover {background-color: Beige;}
 

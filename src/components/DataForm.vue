@@ -73,6 +73,8 @@
 <style scoped lang="scss">
   @forward './../modules/data-input.scss';
 
+  @use './../modules/global-vars.scss' as *;
+
   .form {
     display: flex;
     flex-direction: column;
@@ -112,6 +114,7 @@
   .submit-button {
     border: 0.2em outset SlateBlue;
     border-radius: 0.6em;
+    font-size: $majorFontSize + 0.15em;
     background: linear-gradient(
       90deg,
       Khaki, MintCream, PaleGreen

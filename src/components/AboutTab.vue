@@ -15,7 +15,7 @@
         <ul class="content__ul-list ul-list ul-list--roll">
           <li>separated error reporting about each input field of Form and Table (State Management with Reactivity API),</li>
           <li>implemented thorough validation with RegExp and blocking of inappropriate key input (it works within PC),</li>
-          <li>added preserving data within input fields in case it won't be sent (because of Network error, for example),</li>
+          <li>added error reporting, if default data wasn't received from the server, and preserving data within input fields in case it wasn't sent successfully (because of Network error, for example),</li>
           <li>PATCH and PUT request methods were applied for edit, taking into account data with no change won't be sent to the server,</li>
           <li>new data appended through Form is not fully back-end friendly for now (error 500 exists within <a class="link" href="https://taniarascia.github.io/vue-tutorial/">the demo of the guide</a> on PUT method as well), so as a workaround a PATCH request method only was used for the case,</li>
           <li>added &lt;component&gt; routing and listening of 'hashchange' event to switch tabs and update title of the document,</li>
