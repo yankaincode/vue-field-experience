@@ -11,13 +11,11 @@
       || controlValidationTable.get() ==='pending'}
     ]"
   >
-  <section class="data-tab__section section section--middle">
-    <Transition name="show-up-details" type="transition" appear="appear">
-      <DataDetails class="section__content content" />
-    </Transition>
+  <section class="data-tab__section section">
+    <DataDetails class="section__content content" />
   </section>
 
-    <section class="data-tab__section section section--middle">
+    <section class="data-tab__section section">
       <h2 class="section__title title">Data form</h2>
       <Transition name="show-up-form" type="transition" appear="appear">
         <KeepAlive>
@@ -45,7 +43,7 @@
         :data-collection="dataCollection"
         @delete:data="deleteData"
         @edit:data="editData"
-        class="section__table table"
+        class="section__content content"
       />
     </section>
 
@@ -245,16 +243,6 @@
   }
 
   /*------------------ Animations ------------------*/
-  //--------- show-up-details
-  .show-up-details {
-    &-enter-active {transition: all 1s linear 0.5s;}
-
-    &-enter-from {
-      transform: translateX(-2em);
-      opacity: 0;
-    }
-  }
-
   //--------- show-up-form
   .show-up-form {
     &-enter-active {transition: all 1.2s ease-out 0.3s;}

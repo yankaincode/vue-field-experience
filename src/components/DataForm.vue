@@ -78,6 +78,7 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 1em;
 
     &__input {
       width: 95%;
@@ -89,6 +90,7 @@
 
     &__label {
       align-self: flex-start;
+      margin-left: 1em;
     }
 
     &__submit-button {
@@ -127,7 +129,10 @@
   @media screen and (min-width: 500px) {
     .form {
       &__input {width: 75%;}
-      &__label {align-self: center;}
+      &__label {
+        align-self: center;
+        margin-left: unset;
+      }
     }
   }
 

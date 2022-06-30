@@ -106,13 +106,13 @@
   //--------- show-up-items
   .show-up-items {
     &-enter-active {
-      transition: all 0.5s ease 0.3s;
-      & .item {transition: all 0.3s ease;}
+      transition: all 1.1s ease 0.8s;
+      & .item {transition: all 0.8s ease;}
     }
 
     &-leave-active {
-      transition: all 0.7s ease 0.1s;
-      & .item {transition: all 0.3s ease 0.2s;}
+      transition: all 1s ease 0.8s;
+      & .item {transition: all 0.8s ease 0.5s;}
     }
 
     &-enter-from,

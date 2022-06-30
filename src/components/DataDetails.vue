@@ -54,7 +54,7 @@
       }
     }
 
-    & .details-body {font-size: $majorFontSize - 0.15em;}
+    & .details-body {font-size: $majorFontSize - 0.1em;}
   }
 
   @media screen and (min-width: 1024px) {

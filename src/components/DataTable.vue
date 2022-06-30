@@ -191,7 +191,11 @@
 
   .thead {
     &__row {border-bottom: 0.1em ridge SteelBlue;}
-    &__cell {line-height: 2.3em;}
+    &__cell {
+      line-height: 2.8em;
+      text-align: center;
+      font-size: $majorFontSize + 0.1em;
+    }
   }
 
   .tbody {
@@ -231,8 +235,8 @@
     gap: 0.5em;
 
     &__action-button {
-      height: 1.5em;
-      line-height: 1.5em;
+      height: 1.8em;
+      line-height: 1.8em;
       padding-right: 0.4em;
       padding-left: 0.4em;
     }
@@ -270,6 +274,7 @@
 
     .thead__cell {
       width: 60%;
+      text-align: left;
 
       &:last-child {
         width: 40%;
@@ -309,15 +314,11 @@
   }
 
   @media screen and (min-width: 700px) {
-    .cell {
-      display: table-cell;
-      text-align: left;
-    }
+    .cell {display: table-cell;}
 
     .thead {
       &__cell {
-        padding-top: 0.65em;
-        padding-bottom: 0.3em;
+        padding-top: 0.3em;
 
         &:last-child {padding-right: 4%;}
       }
